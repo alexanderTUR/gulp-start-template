@@ -1,0 +1,134 @@
+//Fonts
+@mixin font-reg {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin font-light {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@mixin font-bold {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+
+//media queries
+//width
+@mixin r($width) {
+  @media only screen and (max-width: $width+ "px") {
+    @content
+  }
+}
+
+@mixin rmin($width) {
+  @media only screen and (min-width: $width+ "px") {
+    @content
+  }
+}
+
+//height
+@mixin rh($height) {
+  @media only screen and (max-height: $height + "px") {
+    @content
+  }
+}
+
+@mixin rhmin($height) {
+  @media only screen and (min-height: $height + "px") {
+    @content
+  }
+}
+
+//width min-max
+@mixin mmw($width-min, $width-max) {
+  @media only screen and (min-width: $width-min + "px") and (max-width: $width-max + "px") {
+    @content
+  }
+}
+
+//height min-max
+@mixin mmh($height-min, $height-max) {
+  @media only screen and (min-height: $height-min + "px") and (max-height: $height-max + "px") {
+    @content
+  }
+}
+
+//retina
+@mixin retina {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    @content
+  }
+}
+
+//iPhoneX landscape
+@mixin iphonexland {
+  @media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (-webkit-device-pixel-ratio : 3) and (orientation : landscape) {
+    @content
+  }
+}
+
+//iPhone landscape
+@mixin iphoneland {
+  @media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : landscape) {
+    @content
+  }
+}
+
+//iPad Pro portrait
+@mixin ipadproport {
+  @media only screen and (min-device-width : 1024px) and (max-device-width : 1366px)  and (orientation : portrait) {
+    @content
+  }
+}
+
+//vertical-align at center
+@mixin vcenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+//clearfix
+@mixin clr {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+//transition
+@mixin transition($property: all, $duration: 0.2s, $easing: linear) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $easing;
+}
+
+//Images
+@mixin img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@mixin cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+//performance
+@mixin gpu {
+  transform: translate3d(0,0,0);
+}
+
+//others
+@mixin unselectable {
+  user-select: none;
+}

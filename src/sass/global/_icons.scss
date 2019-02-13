@@ -1,0 +1,14 @@
+//SVG-sprite styles
+
+.icon-telegram {
+  font-size: 50px;
+  fill: red;
+  @include transition();
+  &:hover {
+    fill: aqua;
+  }
+}
+
+.icon-telegram_color {
+  font-size: 50px;
+}

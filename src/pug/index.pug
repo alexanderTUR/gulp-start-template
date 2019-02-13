@@ -1,0 +1,43 @@
+include includes/templates/_mixins
+doctype
+html(lang="en")
+
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    title Main page
+    meta(name="description" content="")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+
+    include includes/parts/favicons
+
+    link(rel="stylesheet" href="css/main.min.css")
+
+  body
+
+    <!--[if IE]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p><![endif]-->
+
+    //Header bgn
+    include includes/parts/header
+    //Header end
+
+    //Main bgn
+    main.main
+      h2 Main part
+      |
+      |
+      +icon-multi('icon-telegram_color', 'mod-class')
+      |
+      |
+      +icon-mono('icon-telegram')
+
+      .aspect-ratio-16-9
+        .test-image-container
+          img(src='img/test-image.jpg' alt='test image')
+    //Main end
+
+    //Footer bgn
+    include includes/parts/footer
+    //Footer end
+
+    include includes/parts/scripts
