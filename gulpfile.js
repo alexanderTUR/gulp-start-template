@@ -145,7 +145,7 @@ gulp.task('svg-sprite:mono', () => {
                     sprite: '../sprites/sprite-monocolor.svg',
                     render: {
                         scss: {
-                            dest: '../../sass/global/_sprite_generated_monocolor.scss',
+                            dest: '../../sass/global/generated/_sprite_generated_monocolor.scss',
                             template: scrPath+'sass/settings/_sprite_template_monocolor.scss'
                         }
                     }
@@ -177,7 +177,7 @@ gulp.task('svg-sprite:multi', () => {
                     sprite: '../sprites/sprite-multicolor.svg',
                     render: {
                         scss: {
-                            dest: '../../sass/global/_sprite_generated_multicolor.scss',
+                            dest: '../../sass/global/generated/_sprite_generated_multicolor.scss',
                             template: scrPath+'sass/settings/_sprite_template_multicolor.scss'
                         }
                     }

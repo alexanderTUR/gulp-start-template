@@ -272,14 +272,11 @@ summary {
 /* Misc
    ========================================================================== */
 /**
- * Add the correct display in IE 10+.
+ * Add the correct display in IE 10 and IE 10+.
  */
 template, [hidden] {
   display: none; }
 
-/**
- * Add the correct display in IE 10.
- */
 @font-face {
   src: url("../fonts/Roboto-Bold.woff2") format("woff2"), url("../fonts/Roboto-Bold.woff") format("woff"), url("../fonts/Roboto-Bold.ttf") format("truetype");
   font-family: 'Roboto';
@@ -312,11 +309,61 @@ body {
   font-style: normal;
   font-weight: normal; }
 
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none; }
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none; }
+
+hr {
+  display: block;
+  margin: 1em 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+  padding: 0;
+  height: 1px; }
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle; }
+
+fieldset {
+  margin: 0;
+  border: 0;
+  padding: 0; }
+
+textarea {
+  resize: vertical; }
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
   padding: 0.2em 0;
   color: #000; }
+
+.hidden {
+  display: none !important; }
+
+.visuallyhidden {
+  clip: rect(0 0 0 0);
+  -webkit-overflow-scrolling: touch;
+  position: absolute;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.invisible {
+  visibility: hidden; }
 
 .icon-fill {
   fill: currentColor;
