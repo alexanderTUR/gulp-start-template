@@ -384,10 +384,7 @@ textarea {
 
 .icon-telegram {
   fill: red;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  transition: color 0.2s linear;
-  will-change: color;
+  transition: fill 0.2s linear;
   font-size: 3.125rem; }
   .icon-telegram:hover,.icon-telegram:focus {
     fill: aqua; }
