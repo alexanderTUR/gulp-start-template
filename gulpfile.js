@@ -13,7 +13,10 @@ const sourcemaps = require('gulp-sourcemaps');
 const smoothScroll = require('postcss-momentum-scrolling');
 const doiuse = require('doiuse');
 const postcssWillChange = require('postcss-will-change');
+const postcssWillChangeTransition = require('postcss-will-change-transition');
 const postcssAspectRatio = require('postcss-aspect-ratio');
+const postcssPseudoClassEnter = require('postcss-pseudo-class-enter');
+const colorFunction = require('postcss-color-function');
 const cssDeclarationSorter = require('css-declaration-sorter');
 const notify = require('gulp-notify');
 const concat = require('gulp-concat');
@@ -57,22 +60,28 @@ gulp.task('pug', () => {
 // SASS task
 gulp.task('sass', () => {
     const processors = [
-        // insert 3D hack before will-change property
+        // auto adds will-change property after transition property to speed up animations
+        postcssWillChangeTransition(),
+        // auto insert 3D hack before will-change property
         postcssWillChange(),
-        // fix some flex-box issues
+        // auto fix some flex-box issues
         flexFix(),
-        // replace px to rem in all fonts rules
+        // auto replace px to rem in all fonts rules
         pxtorem(),
-        // add -webkit-overflow-scrolling: touch to all styles with overflow: scroll for smooth scroll on iOS
+        // auto adds -webkit-overflow-scrolling: touch to all styles with overflow: scroll for smooth scroll on iOS
         smoothScroll(),
-        // fix an element's dimensions to an aspect ratio.
+        // adds aspect ratio to elements (example - aspect-ratio: '16:9')
         postcssAspectRatio(),
-        // sort css rules in 'concentric-css' order
+        // adds color functions (example - color(red a(90%))
+        colorFunction(),
+        // adds :hover and :focus states with one declaration (example - :enter)
+        postcssPseudoClassEnter(),
+        // auto sort css rules in 'concentric-css' order
         cssDeclarationSorter({order: 'concentric-css'}),
-        // add vendor prefixes
+        // auto adds vendor prefixes
         autoprefixer()
     ];
-    return gulp.src(scrPath+'sass/**/*.scss')
+    return gulp.src(scrPath+'scss/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass()
             .on('error', notify.onError(function (err) {
@@ -145,8 +154,8 @@ gulp.task('svg-sprite:mono', () => {
                     sprite: '../sprites/sprite-monocolor.svg',
                     render: {
                         scss: {
-                            dest: '../../sass/global/generated/_sprite_generated_monocolor.scss',
-                            template: scrPath+'sass/settings/_sprite_template_monocolor.scss'
+                            dest: '../../scss/global/generated/_sprite_generated_monocolor.scss',
+                            template: scrPath+'scss/settings/_sprite_template_monocolor.scss'
                         }
                     }
                 }
@@ -177,8 +186,8 @@ gulp.task('svg-sprite:multi', () => {
                     sprite: '../sprites/sprite-multicolor.svg',
                     render: {
                         scss: {
-                            dest: '../../sass/global/generated/_sprite_generated_multicolor.scss',
-                            template: scrPath+'sass/settings/_sprite_template_multicolor.scss'
+                            dest: '../../scss/global/generated/_sprite_generated_multicolor.scss',
+                            template: scrPath+'scss/settings/_sprite_template_multicolor.scss'
                         }
                     }
                 }
@@ -213,7 +222,7 @@ gulp.task('browser-sync', () => {
 // Watch task
 gulp.task('watch', () => {
     gulp.watch(scrPath+'pug/**/*.*', gulp.series('pug'));
-    gulp.watch(scrPath+'sass/**/*.*', gulp.series('sass'));
+    gulp.watch(scrPath+'scss/**/*.*', gulp.series('sass'));
     gulp.watch([scrPath+'js/common.js', scrPath+'js/libs/*.*'], gulp.series('js'));
     gulp.watch([scrPath+'img/svg-to-sprite-monocolor/*.svg', scrPath+'img/svg-to-sprite-multicolor/*.svg'], gulp.series('svg-sprite-build'));
 });

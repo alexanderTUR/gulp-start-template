@@ -384,15 +384,24 @@ textarea {
 
 .icon-telegram {
   fill: red;
-  transition-duration: 0.2s;
-  transition-property: all;
-  transition-timing-function: linear;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  transition: color 0.2s linear;
+  will-change: color;
   font-size: 3.125rem; }
-  .icon-telegram:hover {
+  .icon-telegram:hover,.icon-telegram:focus {
     fill: aqua; }
 
 .icon-telegram_color {
   font-size: 3.125rem; }
+
+.main h2 {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  transition: color 0.2s linear;
+  will-change: color; }
+  .main h2:hover,.main h2:focus {
+    color: red; }
 
 .aspect-ratio-16-9 {
   position: relative;

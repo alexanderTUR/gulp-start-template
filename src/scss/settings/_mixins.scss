@@ -105,9 +105,7 @@
 
 //transition
 @mixin transition($property: all, $duration: 0.2s, $easing: linear) {
-  transition-property: $property;
-  transition-duration: $duration;
-  transition-timing-function: $easing;
+  transition: $property $duration $easing;
 }
 
 //Images

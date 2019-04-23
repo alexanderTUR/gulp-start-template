@@ -1,4 +1,12 @@
 //Main page styles
+.main {
+  h2 {
+    @include transition(color);
+    &:enter {
+      color: red;
+    }
+  }
+}
 
 //Aspect ration example
 .aspect-ratio-16-9 {

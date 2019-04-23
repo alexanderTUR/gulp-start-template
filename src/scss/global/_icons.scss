@@ -3,8 +3,9 @@
 .icon-telegram {
   font-size: 50px;
   fill: red;
-  @include transition();
-  &:hover {
+  @include transition(color);
+  //transition: fill 0.2s ease;
+  &:enter {
     fill: aqua;
   }
 }
