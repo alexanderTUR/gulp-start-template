@@ -102,18 +102,18 @@ gulp.task('sass', () => {
 gulp.task('js', () => {
     return gulp.src([
         //  - uncomment what you need
-        //  - SVG-sprites fallback for IE
+        //  - SVG-sprites fallback for IE (include, if you use SVG-sprites)
         scrPath+'js/libs/svg4everybody_2.1.9/svg4everybody.js',
-        //  - GSAP
-        // scrPath+'js/libs/gsap_2.0.2/TweenMax.js',
-        //  - ScrollMagic
+        //  - GSAP (animations - https://greensock.com/gsap)
+        // scrPath+'js/libs/gsap_2.1.2/TweenMax.js',
+        //  - ScrollMagic (do magic on scroll - http://scrollmagic.io/)
         // scrPath+'js/libs/scrollmagic_2.0.6/ScrollMagic.js',
         // scrPath+'js/libs/scrollmagic_2.0.6/jquery.ScrollMagic.js',
         // scrPath+'js/libs/scrollmagic_2.0.6/animation.gsap.js',
         // scrPath+'js/libs/scrollmagic_2.0.6/debug.addIndicators.js',
-        //  - Slick slider
+        //  - Slick slider (best carousel - https://kenwheeler.github.io/slick/)
         // scrPath+'js/libs/slick_1.9.0/slick.js',
-        //  - Scroll to ID plugin
+        //  - Scroll to ID plugin (navigation on page - http://manos.malihu.gr/page-scroll-to-id/)
         // scrPath+'js/libs/scrolltoid_1.5.9/jquery.malihu.PageScroll2id.js',
         scrPath+'js/common.js' // always the last
     ])
