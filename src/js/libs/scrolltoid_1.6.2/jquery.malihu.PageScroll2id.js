@@ -1,6 +1,6 @@
 /*
 == Page scroll to id == 
-Version: 1.5.9 
+Version: 1.6.2 
 Plugin URI: http://manos.malihu.gr/page-scroll-to-id/
 Author: malihu
 Author URI: http://manos.malihu.gr
@@ -85,7 +85,9 @@ THE SOFTWARE.
 			/* highlight elements now and in the future */
 			live:true,
 			/* set specific live selector(s): String */
-			liveSelector:false
+			liveSelector:false,
+			/* set specific selector(s) that will be excluded from being handled by the plugin: String */
+			excludeSelectors:false
 		},
 	
 	/* vars, constants */
@@ -152,6 +154,9 @@ THE SOFTWARE.
 						var $this=$(this),
 							href=$this.attr("href"),
 							hrefProp=$this.prop("href").baseVal || $this.prop("href");
+						if(opt.excludeSelectors && $this.is(opt.excludeSelectors)){ //excluded selectors
+							return;
+						}
 						if(href && href.indexOf("#/")!==-1){
 							return;
 						}
@@ -280,6 +285,9 @@ THE SOFTWARE.
 				return $(el).each(function(){
 					var $this=$(this),href=$this.attr("href"),hrefProp=$this.prop("href").baseVal || $this.prop("href");
 					if(functions._isValid.call(null,href,hrefProp)){
+						if(opt.excludeSelectors && $this.is(opt.excludeSelectors)){ //excluded selectors
+							return;
+						}
 						var id=(href.indexOf("#/")!==-1) ? href.split("#/")[1] : href.split("#")[1],t=$("#"+id); 
 						if(t.length>0){
 							if(opt.highlightByNextTarget){
@@ -389,6 +397,10 @@ THE SOFTWARE.
 			
 			_findHighlight:function(id){
 				var wLoc=window.location,loc=wLoc.toString().split("#")[0],locPath=wLoc.pathname;
+				if(loc.indexOf("'")!==-1) loc=loc.replace("'","\\'");
+				if(locPath.indexOf("'")!==-1) locPath=locPath.replace("'","\\'");
+				loc=decodeURIComponent(loc);
+				locPath=decodeURIComponent(locPath);
 				return $("._"+pluginPfx+"-h[href='#"+id+"'],._"+pluginPfx+"-h[href='"+loc+"#"+id+"'],._"+pluginPfx+"-h[href='"+locPath+"#"+id+"'],._"+pluginPfx+"-h[href='#/"+id+"'],._"+pluginPfx+"-h[href='"+loc+"#/"+id+"'],._"+pluginPfx+"-h[href='"+locPath+"#/"+id+"']");
 			},
 			

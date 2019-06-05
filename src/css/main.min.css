@@ -428,4 +428,10 @@ textarea {
   height: 100%;
   object-fit: cover; }
 
+.color-function {
+  border: 1px solid black;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100px;
+  height: 100px; }
+
 /*# sourceMappingURL=main.min.css.map */

@@ -105,16 +105,16 @@ gulp.task('js', () => {
         //  - SVG-sprites fallback for IE (include, if you use SVG-sprites)
         scrPath+'js/libs/svg4everybody_2.1.9/svg4everybody.js',
         //  - GSAP (animations - https://greensock.com/gsap)
-        // scrPath+'js/libs/gsap_2.1.2/TweenMax.js',
+        // scrPath+'js/libs/gsap_2.1.3/TweenMax.js',
         //  - ScrollMagic (do magic on scroll - http://scrollmagic.io/)
-        // scrPath+'js/libs/scrollmagic_2.0.6/ScrollMagic.js',
-        // scrPath+'js/libs/scrollmagic_2.0.6/jquery.ScrollMagic.js',
-        // scrPath+'js/libs/scrollmagic_2.0.6/animation.gsap.js',
-        // scrPath+'js/libs/scrollmagic_2.0.6/debug.addIndicators.js',
+        // scrPath+'js/libs/scrollmagic_2.0.7/ScrollMagic.js',
+        // scrPath+'js/libs/scrollmagic_2.0.7/jquery.ScrollMagic.js',
+        // scrPath+'js/libs/scrollmagic_2.0.7/animation.gsap.js',
+        // scrPath+'js/libs/scrollmagic_2.0.7/debug.addIndicators.js',
         //  - Slick slider (best carousel - https://kenwheeler.github.io/slick/)
         // scrPath+'js/libs/slick_1.9.0/slick.js',
         //  - Scroll to ID plugin (navigation on page - http://manos.malihu.gr/page-scroll-to-id/)
-        // scrPath+'js/libs/scrolltoid_1.5.9/jquery.malihu.PageScroll2id.js',
+        // scrPath+'js/libs/scrolltoid_1.6.2/jquery.malihu.PageScroll2id.js',
         scrPath+'js/common.js' // always the last
     ])
         .pipe(sourcemaps.init())
