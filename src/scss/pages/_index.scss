@@ -34,3 +34,18 @@
   border: 1px solid black;
   background: color($color-black a(30%)); //it`s takes your color and add alpha channel for opacity
 }
+
+//Animation usage example (from https://daneden.github.io/animate.css/)
+.animation-test {
+  margin-top: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  animation: bounce 1.5s infinite;
+}
+
+.remove-test {
+  width: 100px!important;
+  height: 100px!important;
+}
