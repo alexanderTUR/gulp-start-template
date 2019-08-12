@@ -12,3 +12,5 @@ $tb-small: 768;
 $mb-big: 640;
 $mb-mid: 414;
 $mb-small: 320;
+
+$breakpoints: (phoneSmall: 375px, phoneReg: 414px, tabletSmall: 768px, tabletMid: 800px, tabletReg: 1024px, desktopSmall: 1280px, desktopMid: 1366px, desktopReg: 1440px, desktopBig: 1600px, desktopLarge: 1920px);
