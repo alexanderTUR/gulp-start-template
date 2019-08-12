@@ -281,9 +281,9 @@ gulp.task('build:css', () => {
 
         // remove the CSS rules that you don't want
         // pass a list of selectors that you want to exclude and it will remove them and the associated rules from your CSS.
-        cssbyebye({
-            rulesToRemove: ['.remove-test']
-        }),
+        // cssbyebye({
+            // rulesToRemove: ['.remove-test'] // array of selectors, that will be not included to result CSS file
+        // }),
 
         // generate a nicely organized list of all the selectors used in your CSS
         listSelectorsPlugin((list) => {

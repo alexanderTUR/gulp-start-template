@@ -45,7 +45,13 @@
   animation: bounce 1.5s infinite;
 }
 
+//Test selector for cssbyebye plugin
 .remove-test {
   width: 100px!important;
   height: 100px!important;
+}
+
+//CSS-lock example
+.css-lock {
+  @include css-lock(16, 24, 640, 1440, font-size, px); // adjust font-size between 16px and 24px at screen resolution between 640px and 1440px
 }
