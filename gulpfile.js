@@ -20,6 +20,7 @@ const postcssWillChangeTransition = require('postcss-will-change-transition');
 const postcssAspectRatio = require('postcss-aspect-ratio');
 const postcssPseudoClassEnter = require('postcss-pseudo-class-enter');
 const postcssAnimation = require('postcss-animation');
+const postcssCriticalSplit = require('postcss-critical-split');
 const colorFunction = require('postcss-color-function');
 const cssDeclarationSorter = require('css-declaration-sorter');
 const notify = require('gulp-notify');
@@ -36,6 +37,7 @@ const replace = require('gulp-replace');
 const del = require('del');
 const rev = require('gulp-rev');
 const revRewrite = require('gulp-rev-rewrite');
+const inlinesource = require('gulp-inline-source');
 const browserSync = require('browser-sync').create();
 
 // Path variables
@@ -85,7 +87,8 @@ gulp.task('sass', () => {
         // auto sort css rules in 'concentric-css' order
         cssDeclarationSorter({order: 'concentric-css'}),
         // auto adds vendor prefixes
-        autoprefixer()
+        autoprefixer(),
+        // postcssCriticalSplit()
     ];
     return gulp.src(scrPath+'scss/**/*.scss')
         .pipe(sourcemaps.init())
@@ -103,6 +106,46 @@ gulp.task('sass', () => {
         .pipe(gulp.dest(scrPath+'css'))
         .pipe(browserSync.stream());
 });
+
+// Split CSS tasks
+gulp.task('css:split:critical', () => {
+    let splitOptions = getSplitOptions(true);
+
+    return gulp.src([scrPath+'css/**/*.css', '!' + scrPath+ 'css/' + splitOptions.prefix + '*.css'])
+        .pipe(sourcemaps.init({'loadMaps': true}))
+        .pipe(postcss([postcssCriticalSplit(splitOptions)]))
+        .pipe(rename({'prefix': splitOptions.prefix}))
+        .pipe(sourcemaps.write('/'))
+        .pipe(gulp.dest(scrPath+'css'));
+});
+
+gulp.task('css:split:rest', () => {
+    let splitOptions = getSplitOptions(false);
+
+    return gulp.src([scrPath+'css/**/*.css', '!' + scrPath+ 'css/' + splitOptions.prefix + '*.css'])
+        .pipe(sourcemaps.init({'loadMaps': true}))
+        .pipe(postcss([postcssCriticalSplit(splitOptions)]))
+        .pipe(sourcemaps.write('/'))
+        .pipe(gulp.dest(scrPath+'css'));
+});
+
+gulp.task('css:split', gulp.series('css:split:critical', 'css:split:rest'));
+
+function getSplitOptions(isCritical) {
+    let options = {
+        'start': 'critical:start',
+        'stop': 'critical:end',
+        'prefix': 'critical-'
+    };
+
+    if (isCritical === true) {
+        options.output = postcssCriticalSplit.output_types.CRITICAL_CSS;
+    } else {
+        options.output = postcssCriticalSplit.output_types.REST_CSS;
+    }
+
+    return options;
+}
 
 // Js task
 gulp.task('js', () => {
@@ -228,13 +271,13 @@ gulp.task('browser-sync', () => {
 // Watch task
 gulp.task('watch', () => {
     gulp.watch(scrPath+'pug/**/*.*', gulp.series('pug'));
-    gulp.watch(scrPath+'scss/**/*.*', gulp.series('sass'));
+    gulp.watch(scrPath+'scss/**/*.*', gulp.series('sass', 'css:split'));
     gulp.watch([scrPath+'js/common.js', scrPath+'js/libs/*.*'], gulp.series('js'));
     gulp.watch([scrPath+'img/svg-to-sprite-monocolor/*.svg', scrPath+'img/svg-to-sprite-multicolor/*.svg'], gulp.series('svg-sprite-build'));
 });
 
 // Compile all files before copy to build dir
-gulp.task('build:compile', gulp.series('svg-sprite-build', 'pug', 'sass', 'js'));
+gulp.task('build:compile', gulp.series('svg-sprite-build', 'pug', 'sass', 'css:split', 'js'));
 
 // Clean build dir before copy all files
 gulp.task('build:clean', (done) => {
@@ -335,6 +378,8 @@ gulp.task('build:html', () => {
     const manifest = gulp.src('./' + 'rev-manifest.json');
     // copy HTML and replace CSS/JS includes after reversion
     return gulp.src([scrPath+'*.html'])
+        .pipe(inlinesource())
+        .pipe(replace('url(../', 'url('))
         .pipe(revRewrite({ manifest }))
         // minify html if needed
         // .pipe(htmlmin({ collapseWhitespace: true, removeComments: true }))
@@ -352,7 +397,7 @@ gulp.task('build:images', () => {
     // minify and copy IMAGES
     return gulp.src([scrPath + 'img/**/*.*', '!'+scrPath+'img/svg-to-sprite-monocolor/*.*', '!'+scrPath+'img/svg-to-sprite-multicolor/*.*', '!'+scrPath+'img/sprites/*.*'])
         // minify images (low rate)
-        .pipe(imagemin())
+        // .pipe(imagemin())
         // minify images with tinypng API (high rate), limited 500 images per month (use your own API_KEY)
         // .pipe(imageminTiny('1nsRMC7PPcKVYff5dn8vvkzsp06hqmZ2'))
         .pipe(gulp.dest(buildPath + 'img'));
@@ -373,4 +418,4 @@ gulp.task('build:fonts', () => {
 gulp.task('build', gulp.series('build:clean', 'build:compile', 'build:css', 'build:js', 'build:js-vendor', 'build:fonts', 'build:sprites', 'build:images', 'build:php', 'build:html'));
 
 // Default task
-gulp.task('default', gulp.series('pug', 'sass', 'js', 'svg-sprite-build', gulp.parallel('browser-sync', 'watch')));
+gulp.task('default', gulp.series('pug', 'sass', 'css:split', 'js', 'svg-sprite-build', gulp.parallel('browser-sync', 'watch')));

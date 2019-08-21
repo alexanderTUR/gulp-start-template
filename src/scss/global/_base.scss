@@ -10,11 +10,11 @@ html {
 
 body {
   min-width: 320px;
+  margin: 0;
   @include font-reg;
   font-size: 100%;
   color: $color-black;
 }
-
 //Remove text-shadow in selection highlight. Customize the background color to match your design.
 ::selection {
   background: #b3d4fc;

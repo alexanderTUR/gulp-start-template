@@ -14,12 +14,6 @@ html {
 /* Sections
    ========================================================================== */
 /**
- * Remove the margin in all browsers.
- */
-body {
-  margin: 0; }
-
-/**
  * Render the `main` element consistently in IE.
  */
 main {
@@ -279,18 +273,21 @@ template, [hidden] {
 
 @font-face {
   src: url("../fonts/Roboto-Bold.woff2") format("woff2"), url("../fonts/Roboto-Bold.woff") format("woff"), url("../fonts/Roboto-Bold.ttf") format("truetype");
+  font-display: fallback;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: bold; }
 
 @font-face {
   src: url("../fonts/Roboto-Light.woff2") format("woff2"), url("../fonts/Roboto-Light.woff") format("woff"), url("../fonts/Roboto-Light.ttf") format("truetype");
+  font-display: fallback;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 300; }
 
 @font-face {
   src: url("../fonts/Roboto-Regular.woff2") format("woff2"), url("../fonts/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto-Regular.ttf") format("truetype");
+  font-display: fallback;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: normal; }
@@ -302,6 +299,7 @@ html {
   box-sizing: inherit; }
 
 body {
+  margin: 0;
   min-width: 320px;
   color: #000;
   font-family: 'Roboto', sans-serif;
@@ -467,5 +465,7 @@ textarea {
     height: 300px; } }
 
 @keyframes bounce { from, 20%, 53%, 80%, to {transform: translate3d(0,0,0);animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);}40%, 43% {transform: translate3d(0, -30px, 0);animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);}70% {transform: translate3d(0, -15px, 0);animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);}90% {transform: translate3d(0,-4px,0);}}
+
+
 
 /*# sourceMappingURL=main.min.css.map */

@@ -1,6 +1,6 @@
 {
   "name": "gulp-frontend",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Start GULP frontend template",
   "main": "gulpfile.js",
   "scripts": {
@@ -22,7 +22,8 @@
     "gulp-cheerio": "^0.6.3",
     "gulp-concat": "^2.6.1",
     "gulp-htmlmin": "^5.0.1",
-    "gulp-imagemin": "^6.0.0",
+    "gulp-imagemin": "^6.1.0",
+    "gulp-inline-source": "^4.0.0",
     "gulp-notify": "^3.2.0",
     "gulp-postcss": "^8.0.0",
     "gulp-pretty-html": "^2.0.10",
@@ -41,6 +42,7 @@
     "postcss-animation": "0.0.12",
     "postcss-aspect-ratio": "^1.0.2",
     "postcss-color-function": "^4.1.0",
+    "postcss-critical-split": "^2.5.3",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-momentum-scrolling": "^1.8.15",
     "postcss-pseudo-class-enter": "^5.0.0",
