@@ -1,3 +1,4 @@
+/* critical:start */
 //Base styles
 //Box-sizing defaults
 html {
@@ -14,7 +15,12 @@ body {
   @include font-reg;
   font-size: 100%;
   color: $color-black;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+/* critical:end */
+
 //Remove text-shadow in selection highlight. Customize the background color to match your design.
 ::selection {
   background: #b3d4fc;

@@ -15,9 +15,18 @@
 @import "global/generated/sprite_generated_multicolor";
 @import "global/icons";
 
+//Elements styles
+@import "elements/example";
+
+//Components styles
+@import "components/example";
+
+//Blocks styles
+@import "blocks/example";
+
 //Global page layout styles
-@import "global/header";
-@import "global/footer";
+@import "layouts/header";
+@import "layouts/footer";
 
 //Page styles
 @import "pages/index";

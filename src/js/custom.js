@@ -25,7 +25,7 @@
 $(function() {
 
     // Load SVG-sprite on IE
-    // svg4everybody({});
+    svg4everybody({});
 
     console.log('DOM loaded');
 

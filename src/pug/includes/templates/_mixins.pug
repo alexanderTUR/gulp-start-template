@@ -1,9 +1,0 @@
-mixin icon-mono(name, mod)
-  - mod = mod || ""
-  svg(class="icon-fill" + " " + name + " " + mod)
-    use(xlink:href="img/sprites/sprite-monocolor.svg#" + name)
-
-mixin icon-multi(name, mod)
-  - mod = mod || ""
-  svg(class="icon" + " " + name + " " + mod)
-    use(xlink:href="img/sprites/sprite-multicolor.svg#" + name)

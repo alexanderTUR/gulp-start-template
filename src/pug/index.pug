@@ -1,4 +1,4 @@
-include includes/templates/_mixins
+include includes/mixins/all
 doctype
 html(lang="en")
 
@@ -8,7 +8,7 @@ html(lang="en")
     meta(name="description" content="")
     meta(name="viewport" content="width=device-width, initial-scale=1")
 
-    include includes/parts/favicons
+    include includes/layouts/favicons
 
     //Place your critical css here. Add 'inline' for inlining css from file in build task
     link(rel="stylesheet" href="css/critical-main.min.css" inline)
@@ -18,7 +18,7 @@ html(lang="en")
     <!--[if IE]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p><![endif]-->
 
     //Header bgn
-    include includes/parts/header
+    include includes/layouts/header
     //Header end
 
     //Main bgn
@@ -26,12 +26,14 @@ html(lang="en")
       h2 Main part
       |
       |
-      +icon-multi('icon-telegram_color', 'mod-class')
+      +icon-multi('icon-telegram_color', 'icon-telegram')
       |
       |
-      +icon-mono('icon-telegram')
+      +icon-mono('icon-telegram', 'icon-telegram')
 
       .test-critical
+
+      include includes/elements/example
 
       .color-function
 
@@ -47,7 +49,7 @@ html(lang="en")
     //Main end
 
     //Footer bgn
-    include includes/parts/footer
+    include includes/layouts/footer
     //Footer end
-    include includes/parts/styles
-    include includes/parts/scripts
+    include includes/layouts/styles
+    include includes/layouts/scripts

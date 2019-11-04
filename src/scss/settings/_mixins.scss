@@ -123,7 +123,7 @@
 }
 
 //transition
-@mixin transition($property: all, $duration: 0.2s, $easing: linear) {
+@mixin transition($property: all, $duration: 0.2s, $easing: ease) {
   transition: $property $duration $easing;
 }
 
@@ -145,7 +145,24 @@
   transform: translate3d(0,0,0);
 }
 
-//others
-@mixin unselectable {
-  user-select: none;
+//reset buttons
+@mixin resetbutton($padding: 0) {
+  border: none;
+  margin: 0;
+  padding: $padding;
+  width: auto;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+}
+
+//reset first-child/last-child margins
+@mixin marginchildreset {
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
