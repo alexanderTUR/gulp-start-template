@@ -25,10 +25,9 @@ const colorFunction = require('postcss-color-function');
 const cssDeclarationSorter = require('css-declaration-sorter');
 const notify = require('gulp-notify');
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
 const htmlmin = require('gulp-htmlmin');
 const imagemin = require('gulp-imagemin');
-const imageminTiny = require('gulp-tinypng');
 const rename = require('gulp-rename');
 const svgSprite = require('gulp-svg-sprite');
 const svgmin = require('gulp-svgmin');
@@ -109,7 +108,7 @@ gulp.task('sass', () => {
 // Split CSS tasks
 gulp.task('css:split:critical', () => {
   let splitOptions = getSplitOptions(true);
-  
+
   return gulp.src([scrPath + 'css/**/*.css', '!' + scrPath+ 'css/' + splitOptions.prefix + '*.css'])
     .pipe(sourcemaps.init({'loadMaps': true}))
     .pipe(postcss([postcssCriticalSplit(splitOptions)]))
@@ -121,7 +120,7 @@ gulp.task('css:split:critical', () => {
 
 gulp.task('css:split:rest', () => {
   let splitOptions = getSplitOptions(false);
-  
+
   return gulp.src([scrPath + 'css/**/*.css', '!' + scrPath+ 'css/' + splitOptions.prefix + '*.css'])
     .pipe(sourcemaps.init({'loadMaps': true}))
     .pipe(postcss([postcssCriticalSplit(splitOptions)]))
@@ -138,13 +137,13 @@ function getSplitOptions(isCritical) {
     'stop': 'critical:end',
     'prefix': 'critical-'
   };
-  
+
   if (isCritical === true) {
     options.output = postcssCriticalSplit.output_types.CRITICAL_CSS;
   } else {
     options.output = postcssCriticalSplit.output_types.REST_CSS;
   }
-  
+
   return options;
 }
 
@@ -304,13 +303,13 @@ gulp.task('build:css', () => {
   // const cssbyebyeOptions = ['.remove-test'];
   // postCSS plugins for build optimizations
   const processors = [
-    
+
     // pack all media queries
     mqpacker({
       sort: sortCSSmq //mobile-first
       // replace with 'sort: sortCSSmq.desktopFirst' for desktop-first
     }),
-    
+
     // check CSS for support in browsers from browserlist with outputs to console
     doiuse({
       browserslist: 'package.json',
@@ -323,29 +322,29 @@ gulp.task('build:css', () => {
       onFeatureUsage: function (info) {
         const selector = info.usage.parent.selector;
         const property = `${info.usage.prop}: ${info.usage.value}`;
-        
+
         let status = info.featureData.caniuseData.status.toUpperCase();
-        
+
         if (info.featureData.missing) {
           status = `NOT SUPPORTED IN ${info.featureData.missing}`.red;
         } else if (info.featureData.partial) {
           status = `PARTIAL SUPPORT ${info.featureData.partial}`.yellow;
         }
-        
+
         console.log(`\n${status}:\n\n    ${selector} {\n        ${property};\n    }\n`);
       }
     }),
-    
+
     // remove the CSS rules that you don't want
     // pass a list of selectors that you want to exclude and it will remove them and the associated rules from your CSS.
     // cssbyebye({
     // rulesToRemove: ['.remove-test'] // array of selectors, that will be not included to result CSS file
     // }),
-    
+
     // generate a nicely organized list of all the selectors used in your CSS
     listSelectorsPlugin((list) => {
       const inspect = require('util').inspect;
-      
+
       console.log('SELECTORS:'.blue);
       console.log(inspect(list.selectors, { maxArrayLength: null }).blue);
       console.log('IDS:'.red);
@@ -354,7 +353,7 @@ gulp.task('build:css', () => {
     // minify css
     cssnano()
   ];
-  
+
   // minify, analise and copy CSS
   return gulp.src([scrPath + 'css/*.css'])
     .pipe(postcss(processors))
@@ -417,8 +416,6 @@ gulp.task('build:images', () => {
   return gulp.src([scrPath + 'img/**/*.*', '!' + scrPath + 'img/svg-to-sprite-monocolor/*.*', '!' + scrPath  +'img/svg-to-sprite-multicolor/*.*', '!' + scrPath + 'img/sprites/*.*'])
   // minify images (low rate)
   // .pipe(imagemin())
-  // minify images with tinypng API (high rate), limited 500 images per month (use your own API_KEY)
-  // .pipe(imageminTiny('1nsRMC7PPcKVYff5dn8vvkzsp06hqmZ2'))
     .pipe(gulp.dest(buildPath + 'img'));
 });
 

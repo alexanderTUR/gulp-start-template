@@ -6,11 +6,8 @@ html {
   box-sizing: inherit; }
 
 body {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
+  flex-direction: column;
   margin: 0;
   min-width: 320px;
   min-height: 100vh;

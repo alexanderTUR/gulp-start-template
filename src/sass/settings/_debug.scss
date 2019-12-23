@@ -1,0 +1,13 @@
+/* подсвечиваем теги без необходимых атрибутов */
+img:not([alt]),
+label:not([for]),
+input[type=submit]:not([value]) {
+  outline:2px solid red;
+}
+
+/* тревога, если первый child внутри списка не li и прочие похожие примеры */
+ul > *:not(li),
+ol > *:not(li),
+dl > *:not(dt):not(dd) {
+  outline:2px solid red;
+}
