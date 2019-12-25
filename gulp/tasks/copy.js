@@ -1,6 +1,7 @@
 import gulp from 'gulp';
 import config from '../config.js';
 
+// copy static images files to destination folder
 gulp.task('copy:img', () => gulp
   .src([
     config.src.img + '/**/*.{jpg,png,jpeg,svg,gif}',
@@ -9,11 +10,13 @@ gulp.task('copy:img', () => gulp
   .pipe(gulp.dest(config.dest.img))
 );
 
+// copy fonts files to destination folder
 gulp.task('copy:fonts', () => gulp
   .src(config.src.fonts + '/*.{ttf,eot,woff,woff2}')
   .pipe(gulp.dest(config.dest.fonts))
 );
 
+// copy JS vendor files to destination folder
 gulp.task('copy:vendor', () => gulp
   .src(config.src.jsVendor + '/*.js')
   .pipe(gulp.dest(config.dest.jsVendor))

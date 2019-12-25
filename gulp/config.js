@@ -2,13 +2,18 @@ import util from 'gulp-util';
 
 const production = util.env.production || util.env.prod || util.env._.indexOf('build') !== -1 || false;
 
+// main paths
 const srcPath = 'src';
 const destPath = 'build';
 
 const config = {
   env: 'development',
   production: production,
+  revision: false, // set to true if CSS and JS files revision needed
+  minifyHtml: false, // set to true if HTML minification needed
+  revManifest: 'rev-manifest.json',
 
+  // src paths
   src: {
     root: srcPath,
     pug: srcPath + '/pug',
@@ -22,6 +27,7 @@ const config = {
     fonts: srcPath + '/fonts',
   },
 
+  // destination paths
   dest: {
     root: destPath,
     html: destPath,
@@ -32,6 +38,7 @@ const config = {
     fonts: destPath + '/fonts',
   },
 
+  // CSS split options
   splitOptions: {
     start: 'critical:start',
     stop: 'critical:end',
@@ -48,7 +55,7 @@ const config = {
   logEnv: function() {
     util.log(
       'Environment:',
-      util.colors.white.bgRed(' ' + process.env.NODE_ENV + ' ')
+      util.colors.white.bgGreen(' ' + process.env.NODE_ENV + ' ')
     );
   },
 

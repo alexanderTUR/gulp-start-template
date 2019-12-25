@@ -19,8 +19,11 @@ import postcssCriticalSplit from 'postcss-critical-split';
 import cssnano from 'cssnano';
 import gulpif from 'gulp-if';
 import rename from 'gulp-rename';
+import lazypipe from 'lazypipe';
+import rev from 'gulp-rev';
 import config from '../config';
 
+// Post-CSS plugins array
 const processors = [
   // adds @keyframes from animate.css
   postcssAnimation(),
@@ -46,38 +49,63 @@ const processors = [
   autoprefixer(),
   // pack all media queries
   mqpacker({
-    sort: sortCSSmq //mobile-first
+    sort: sortCSSmq //default - mobile-first
     // replace with 'sort: sortCSSmq.desktopFirst' for desktop-first
   }),
 ];
 
+// production pipes
+const prodPipes = lazypipe()
+  // minify CSS
+  .pipe(postcss, [cssnano()])
+  // if revision == true: add hash number to your CSS files names
+  .pipe(function () {
+    return gulpif(config.revision, rev());
+  });
+
 const renderCss = (critical) => {
   return gulp
+    // take all SASS/SCSS files
     .src(config.src.sass + '/*.{sass,scss}')
+    // if development: init sourcemaps
     .pipe(gulpif(!config.production,
       sourcemaps.init()
     ))
-    // .pipe(sourcemaps.init())
+    // compile SASS
     .pipe(sass({
       outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
       precision: 5
     }))
+    // error handler
     .on('error', config.errorHandler)
+    // apply postcss plugins
     .pipe(postcss(processors))
+    // if critical CSS part: rename
     .pipe(gulpif(critical,
       rename({'prefix': config.splitOptions.prefix})
     ))
+    // split CSS to critical/rest
     .pipe(postcss([postcssCriticalSplit(getSplitOptions(critical))]))
+    .pipe(rename({'suffix': '-min'}))
+    // if production: run production pipes
     .pipe(gulpif(config.production,
-      postcss([cssnano()])
+      prodPipes()
     ))
+    // if development: write sourcemaps
     .pipe(gulpif(!config.production,
       sourcemaps.write('./')
     ))
-    // .pipe(sourcemaps.write('./'))
+    // put result to destination folder
     .pipe(gulp.dest(config.dest.css))
+    // if revision == true: write old and new files names to manifest.json
+    .pipe(rev.manifest(config.revManifest, {
+      base: './',
+      merge: true // merge with the existing manifest (if one exists)
+    }))
+    .pipe(gulp.dest('./'))
 };
 
+// CSS split output function
 function getSplitOptions(isCritical) {
 
   if (isCritical === true) {

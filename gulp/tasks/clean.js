@@ -5,9 +5,11 @@ import config from '../config';
 const build = () => {
   return function () {
     return del([
-      config.dest.root
+      config.dest.root, // delete destination folder
+      config.revManifest // delete rev-manifest file
     ])
-    .then(paths => util.log('Deleted:', util.colors.magenta(paths.join('\n'))))
+    // log to console deleted objects
+    .then(paths => util.log('Deleted:', util.colors.cyan(paths.join('\n'))))
   };
 };
 
