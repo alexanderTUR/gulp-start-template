@@ -1,9 +1,0 @@
-mixin icon-mono(name, label)
-  - label = label || ""
-  svg(class="icon-fill" + " " + name aria-label=label)
-    use(xlink:href="img/sprites/sprite-monocolor.svg#" + name)
-
-mixin icon-multi(name, label)
-  - label = label || ""
-  svg(class="icon" + " " + name aria-label=label)
-    use(xlink:href="img/sprites/sprite-multicolor.svg#" + name)

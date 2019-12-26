@@ -1,0 +1,40 @@
+include ../mixins/all
+doctype html
+html
+  //Head bgn
+  head
+    include _head
+    include _favicons
+    include _media-tags
+    include _css-critical
+  //Head end
+
+  //Body bgn
+  body(class=bodyClass)
+    include ../parts/_if-ie
+
+    //Header bgn
+    block header
+      include _header
+    //Header end
+
+    //Main bgn
+    main.page-main
+      block content
+    //Main end
+
+    //Footer bgn
+    block footer
+      include _footer
+    //Footer end
+
+    //Styles bgn
+    block styles
+      include _styles
+    //Styles end
+
+    //Scripts bgn
+    block scripts
+      include _scripts
+    //Scripts end
+  //Body end

@@ -1,0 +1,33 @@
+//Settings
+@import "settings/all";
+
+//Fonts
+@import "global/fonts";
+
+//Global base styles
+@import "global/base";
+
+//Libs styles
+@import "libs/all";
+
+//Icons styles
+@import "generated/sprite-generated";
+
+//Elements styles
+@import "elements/example";
+
+//Components styles
+@import "components/example";
+
+//Blocks styles
+@import "blocks/example";
+
+//Global page layout styles
+@import "layouts/header";
+@import "layouts/footer";
+
+//Page styles
+@import "pages/index";
+
+//Debug styles
+//@import "settings/debug";

@@ -1,0 +1,87 @@
+//Main page styles
+
+//All styles below are for example
+.main {
+  h2 {
+    @include transition(color);
+    &:enter { // will replace as :hover and :focus
+      color: blue;
+    }
+  }
+}
+
+//Aspect ration example
+.aspect-ratio-16-9 {
+  aspect-ratio: '16:9'; //use if need aspect ratio for images
+  max-width: 800px;
+  width: 100%;
+  border: 1px solid $color-black;
+}
+
+.test-image-container {
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+//Example how to use color function
+.color-function {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  background: color($color-black a(30%)); //it`s takes your color and add alpha channel for opacity
+}
+
+//Animation usage example (from https://daneden.github.io/animate.css/)
+.animation-test {
+  margin-top: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  animation: bounce 1.5s infinite;
+}
+
+//Test selector for cssbyebye plugin
+.remove-test {
+  width: 100px!important;
+  height: 100px!important;
+}
+
+//CSS-lock example
+.css-lock {
+  @include css-lock(16, 24, 640, 1440, font-size, px); // adjust font-size between 16px and 24px at screen resolution between 640px and 1440px
+}
+
+//Example how to use breakpoints mixin (more details at https://include-media.com/)
+.test-media {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  @include media(">phoneReg", "<=tabletReg") {
+    width: 300px;
+    height: 300px;
+    background-color: red;
+  }
+}
+
+.icon-fill {
+  font-size: 50px;
+  color: #000;
+  @include transition(color);
+  &:enter {
+    color: red;
+  }
+}
+
+//Use comments below for critical CSS
+/* critical:start */
+.test-critical {
+  width: 150px;
+  height: 100px;
+  background-color: black;
+}
+/* critical:end */
