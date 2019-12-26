@@ -1,55 +1,53 @@
-include includes/mixins/all
-doctype
-html(lang="en")
+---
+title: Index Page
+bodyClass: template-main
+---
+extends layouts/_main-layout
 
-  head
-    meta(charset="utf-8")
-    title Main page
-    meta(name="description" content="")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
+block content
 
-    include includes/layouts/_favicons
+  //- variable use example
+  h1= title
 
-    //Place your critical css here. Add 'inline' for inlining css from file in build task
-    link(rel="stylesheet" href="css/critical-main-min.css" inline)
+  //- partial include example
+  include parts/_example
 
-  body
+  //- mixin example
+  div
 
-    <!--[if IE]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p><![endif]-->
+    |
+    |
+    +icon('icon-telegram', 'Telegram icon')
+    |
+    |
+    +icon('icon-facebook', 'Facebook icon')
+    |
+    |
 
-    //Header bgn
-    include includes/layouts/_header
-    //Header end
+  //- variable set example
+  - let list = ['text 1', 'text 2', 'text 3'];
 
-    //Main bgn
-    main.main
-      h2 Main part
-      |
-      |
-      +icon('icon-telegram', 'Telegram icon')
-      |
-      |
-      +icon('icon-facebook', 'Facebook icon')
+  //- loop example
+  ul
+    for item in list
+      li= item
 
-      .test-critical
+  //color function use example (look in CSS)
+  .color-function
 
-      include includes/elements/_example
+  //aspect ration use example (look in CSS)
+  .aspect-ratio-16-9
+    .test-image-container
+      img(src='img/test-image.jpg' alt='test image')
 
-      .color-function
+  //animation use example (look in CSS)
+  .animation-test
 
-      .aspect-ratio-16-9
-        .test-image-container
-          img(src='img/test-image.jpg' alt='test image')
+  //critical CSS use example (look in CSS)
+  .test-critical
 
-      .animation-test
+  //css-lock use example (look in CSS)
+  p.css-lock Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus incidunt itaque nisi, nostrum obcaecati quae, quisquam, quo rerum similique ut voluptas voluptate. Aut delectus eaque eos fuga ipsum laboriosam numquam quo sunt. Ab, consequuntur culpa delectus ducimus molestiae praesentium quia repellat sequi. Corporis cum delectus deserunt doloribus est, et ex fuga illum ipsum minus necessitatibus nemo non pariatur, quisquam recusandae reprehenderit similique unde vel vero voluptatum.
 
-      p.css-lock Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus incidunt itaque nisi, nostrum obcaecati quae, quisquam, quo rerum similique ut voluptas voluptate. Aut delectus eaque eos fuga ipsum laboriosam numquam quo sunt. Ab, consequuntur culpa delectus ducimus molestiae praesentium quia repellat sequi. Corporis cum delectus deserunt doloribus est, et ex fuga illum ipsum minus necessitatibus nemo non pariatur, quisquam recusandae reprehenderit similique unde vel vero voluptatum. Animi esse impedit ipsa maxime odio porro tempora velit! Aliquam aspernatur at atque, aut autem blanditiis consequatur cumque, debitis inventore iusto laborum libero nam placeat quia quis recusandae, rem totam veritatis. Dolorum eaque harum laudantium minus natus nesciunt porro sed. Aspernatur at aut, commodi, cumque doloribus enim eos impedit itaque labore laudantium magnam nam necessitatibus ullam?
-
-      .test-media
-    //Main end
-
-    //Footer bgn
-    include includes/layouts/_footer
-    //Footer end
-    include includes/layouts/_styles
-    include includes/layouts/_scripts
+  //media queries test
+  .test-media

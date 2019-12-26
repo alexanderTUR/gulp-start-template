@@ -4,6 +4,7 @@ import pug from 'gulp-pug';
 import plumber from 'gulp-plumber'
 import changed from 'gulp-changed';
 import gulpif from 'gulp-if';
+import frontMatter from 'gulp-front-matter';
 import prettify from 'gulp-prettify';
 import revRewrite from 'gulp-rev-rewrite';
 import lazypipe from 'lazypipe';
@@ -41,6 +42,8 @@ const renderHtml = (onlyChanged) => {
     .pipe(gulpif(onlyChanged,
       changed(config.dest.html, { extension: '.html' })
     ))
+    // extract `YAML Front-Matter` header from files
+    .pipe(frontMatter({ property: 'data' }))
     // compile PUG
     .pipe(pug())
     // prettify output

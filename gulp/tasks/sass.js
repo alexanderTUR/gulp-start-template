@@ -12,7 +12,7 @@ import flexFix from 'postcss-flexbugs-fixes';
 import pxtorem from 'postcss-pxtorem';
 import smoothScroll from 'postcss-momentum-scrolling';
 import postcssAspectRatio from 'postcss-aspect-ratio';
-import colorFunction from 'postcss-color-function';
+import postcssColorMod from 'postcss-color-mod-function';
 import postcssPseudoClassEnter from 'postcss-pseudo-class-enter';
 import cssDeclarationSorter from 'css-declaration-sorter';
 import postcssCriticalSplit from 'postcss-critical-split';
@@ -40,7 +40,7 @@ const processors = [
   // adds aspect ratio to elements (example - aspect-ratio: '16:9')
   postcssAspectRatio(),
   // adds color functions (example - color(red a(90%))
-  colorFunction(),
+  postcssColorMod(),
   // adds :hover and :focus states with one declaration (example - :enter)
   postcssPseudoClassEnter(),
   // auto sort css rules in 'concentric-css' order
@@ -86,7 +86,8 @@ const renderCss = (critical) => {
     ))
     // split CSS to critical/rest
     .pipe(postcss([postcssCriticalSplit(getSplitOptions(critical))]))
-    .pipe(rename({'suffix': '-min'}))
+    // rename file with .min suffix
+    .pipe(rename({'suffix': '.min'}))
     // if production: run production pipes
     .pipe(gulpif(config.production,
       prodPipes()

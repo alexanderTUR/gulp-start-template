@@ -5,7 +5,7 @@ const getTaskBuild = task => require('./gulp/tasks/' + task).build(gulp);
 const getTaskWatch = task => require('./gulp/tasks/' + task).watch(gulp);
 
 // PUG tasks
-gulp.task('pug', getTaskBuild('pug'));
+gulp.task('pug', () => getTaskBuild('pug'));
 gulp.task('pug:watch', getTaskWatch('pug'));
 
 // JS tasks
@@ -30,12 +30,14 @@ gulp.task('clean', getTaskBuild('clean'));
 // Server task
 gulp.task('server', getTaskBuild('server'));
 
+// Set production mode
 const setmodeProd = done => {
   config.setEnv('production');
   config.logEnv();
   done();
 };
 
+// Set development mode
 const setmodeDev = done => {
   config.setEnv('development');
   config.logEnv();

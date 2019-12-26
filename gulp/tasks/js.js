@@ -43,8 +43,8 @@ gulp.task('js:bundle', () => gulp
   ))
   // concatenate library JS files in one bundle JS file, and rename it to bundle.js
   .pipe(concat('bundle.js'))
-  // rename file with -min suffix
-  .pipe(rename({'suffix': '-min'}))
+  // rename file with .min suffix
+  .pipe(rename({'suffix': '.min'}))
   // if production: run production pipes
   .pipe(gulpif(config.production,
     prodPipes()
@@ -70,8 +70,8 @@ gulp.task('js:main', () => gulp
   .pipe(gulpif(!config.production,
     sourcemaps.init()
   ))
-  // rename file with -min suffix
-  .pipe(rename({'suffix': '-min'}))
+  // rename file with .min suffix
+  .pipe(rename({'suffix': '.min'}))
   // if production: run production pipes
   .pipe(gulpif(config.production,
     prodPipes()

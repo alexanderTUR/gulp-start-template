@@ -23,7 +23,21 @@ gulp.task('copy:vendor', () => gulp
 );
 
 const build = gulp => gulp.parallel('copy:img', 'copy:fonts', 'copy:vendor');
-const watch = gulp => () => gulp.watch(config.src.img + '/*', gulp.parallel('copy:img', 'copy:fonts', 'copy:vendor'));
+const watch = gulp => {
+  return function() {
+    gulp.watch([
+      config.src.img + '/*'
+    ], gulp.parallel('copy:img'));
+
+    gulp.watch([
+      config.src.fonts + '/*'
+    ], gulp.parallel('copy:fonts'));
+
+    gulp.watch([
+      config.src.jsVendor + '/*'
+    ], gulp.parallel('copy:vendor'));
+  }
+};
 
 module.exports.build = build;
 module.exports.watch = watch;
