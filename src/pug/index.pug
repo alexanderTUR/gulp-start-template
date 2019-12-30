@@ -6,13 +6,13 @@ extends layouts/_main-layout
 
 block content
 
-  //- variable use example
+  //- variable usage example
   h1= title
 
   //- partial include example
   include parts/_example
 
-  //- mixin example
+  //- mixin usage example
   div
 
     |
@@ -27,27 +27,36 @@ block content
   //- variable set example
   - let list = ['text 1', 'text 2', 'text 3'];
 
-  //- loop example
+  //- loop usage example
   ul
     for item in list
       li= item
 
-  //color function use example (look in CSS)
+  //color function usage example (look in _start-examples.scss file for more info)
   .color-function
 
-  //aspect ration use example (look in CSS)
+  //aspect ration usage example (look in _start-examples.scss file for more info)
   .aspect-ratio-16-9
-    .test-image-container
-      img(src='img/test-image.jpg' alt='test image')
+    img(src='img/test-image.jpg' alt='test image')
 
-  //animation use example (look in CSS)
+  //animation usage example (look in _start-examples.scss file for more info)
   .animation-test
 
-  //critical CSS use example (look in CSS)
+  //critical CSS usage example (look in _index.scss file for more info)
   .test-critical
 
-  //css-lock use example (look in CSS)
+  //css-lock usage example (look in _start-examples.scss file for more info)
   p.css-lock Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus incidunt itaque nisi, nostrum obcaecati quae, quisquam, quo rerum similique ut voluptas voluptate. Aut delectus eaque eos fuga ipsum laboriosam numquam quo sunt. Ab, consequuntur culpa delectus ducimus molestiae praesentium quia repellat sequi. Corporis cum delectus deserunt doloribus est, et ex fuga illum ipsum minus necessitatibus nemo non pariatur, quisquam recusandae reprehenderit similique unde vel vero voluptatum.
 
-  //media queries test
+  //media queries usage example (look in _start-examples.scss file for more info)
   .test-media
+
+  //LostGrid usage example (look in _start-examples.scss file for more info)
+  .lost-example
+    .lost-example__wrapper
+      .lost-example__col
+        p THIS IS "LOST" COLUMN N1
+      .lost-example__col
+        p THIS IS "LOST" COLUMN N2
+      .lost-example__col
+        p THIS IS "LOST" COLUMN N3

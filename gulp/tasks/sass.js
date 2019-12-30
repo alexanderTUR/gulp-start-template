@@ -17,6 +17,7 @@ import postcssPseudoClassEnter from 'postcss-pseudo-class-enter';
 import cssDeclarationSorter from 'css-declaration-sorter';
 import postcssCriticalSplit from 'postcss-critical-split';
 import cssnano from 'cssnano';
+import lost from 'lost';
 import gulpif from 'gulp-if';
 import rename from 'gulp-rename';
 import lazypipe from 'lazypipe';
@@ -25,6 +26,8 @@ import config from '../config';
 
 // Post-CSS plugins array
 const processors = [
+  // lostgrid grid system (look for documentation at http://lostgrid.org/docs.html)
+  lost(),
   // adds @keyframes from animate.css
   postcssAnimation(),
   // auto adds will-change property after transition property to speed up animations
