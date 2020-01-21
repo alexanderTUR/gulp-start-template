@@ -23,6 +23,9 @@ gulp.task('js:bundle', () => gulp
     //  - uncomment what you need or add you own libraries
     //  - SVG-sprites fallback for IE (include, if you use SVG-sprites)
     config.src.jsLibs + '/svg4everybody_2.1.9/svg4everybody.js',
+    //  - Micromodal plugin (with pollyfill for IE11 and below - (https://micromodal.now.sh/)
+    // config.src.jsLibs + '/micromodal_0.4.2/micromodal-for-ie-polyfill.js',
+    // config.src.jsLibs + '/micromodal_0.4.2/micromodal.min.js',
     //  - GSAP (animations - https://greensock.com/gsap)
     // config.src.jsLibs + '/gsap_3.0.4/gsap.js',
     //  - ScrollMagic (do magic on scroll - http://scrollmagic.io/)

@@ -10,16 +10,23 @@ html {
 }
 
 body {
-  min-width: 320px;
-  margin: 0;
-  font-family: 'Roboto', Helvetica, Verdana, sans-serif;
-  font-size: 100%;
-  color: $color-black;
   display: flex;
   flex-direction: column;
+  min-width: 320px;
   min-height: 100vh;
+  margin: 0;
+  color: $color-black;
+  font-family: 'Roboto', Helvetica, Verdana, sans-serif;
+  font-size: 100%;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
 }
 /* critical:end */
+
+//A better looking default links decoration
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
 
 //Remove text-shadow in selection highlight. Customize the background color to match your design.
 ::selection {
@@ -47,6 +54,14 @@ video {
   vertical-align: middle;
 }
 
+//Inherit font for inputs
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
 //Remove default fieldset styles.
 fieldset {
   border: 0;
@@ -59,6 +74,17 @@ textarea {
   resize: vertical;
 }
 
+//Reset all CSS animation for user, who prefer less animation in browsers
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+//Some helper classes
 //Old IE message block
 .browserupgrade {
   margin: 0.2em 0;
