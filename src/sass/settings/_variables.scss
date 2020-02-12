@@ -6,4 +6,15 @@ $color-black: #000;
 $base-font-size: 16px !default;
 
 //Breakpoints for include-media mixins
-$breakpoints: (phoneSmall: 375px, phoneReg: 414px, tabletSmall: 768px, tabletMid: 800px, tabletReg: 1024px, desktopSmall: 1280px, desktopMid: 1366px, desktopReg: 1440px, desktopBig: 1600px, desktopLarge: 1920px);
+$breakpoints: (
+  phoneSmall: 375px,
+  phoneReg: 414px,
+  tabletSmall: 768px,
+  tabletMid: 800px,
+  tabletReg: 1024px,
+  desktopSmall: 1280px,
+  desktopMid: 1366px,
+  desktopReg: 1440px,
+  desktopBig: 1600px,
+  desktopLarge: 1920px
+);

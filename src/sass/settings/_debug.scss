@@ -1,7 +1,7 @@
 //highlight tags without necessary attributes
 img:not([alt]),
 label:not([for]),
-input[type=submit]:not([value]) {
+input[type="submit"]:not([value]) {
   outline: 2px solid red;
 }
 

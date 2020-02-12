@@ -1,12 +1,32 @@
 // Avoid `console` errors in browsers that lack a console.
 (function() {
   var method;
-  var noop = function () {};
+  var noop = function() {};
   var methods = [
-    'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
-    'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
-    'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
-    'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+    "assert",
+    "clear",
+    "count",
+    "debug",
+    "dir",
+    "dirxml",
+    "error",
+    "exception",
+    "group",
+    "groupCollapsed",
+    "groupEnd",
+    "info",
+    "log",
+    "markTimeline",
+    "profile",
+    "profileEnd",
+    "table",
+    "time",
+    "timeEnd",
+    "timeline",
+    "timelineEnd",
+    "timeStamp",
+    "trace",
+    "warn"
   ];
   var length = methods.length;
   var console = (window.console = window.console || {});
@@ -19,11 +39,10 @@
       console[method] = noop;
     }
   }
-}());
+})();
 
 // Place your jQuery code here.
 $(function() {
-
   // Load SVG-sprite on IE
   svg4everybody({});
 
@@ -34,6 +53,5 @@ $(function() {
   //   awaitCloseAnimation: true
   // });
 
-  console.log('DOM loaded');
-
+  console.log("DOM loaded");
 });

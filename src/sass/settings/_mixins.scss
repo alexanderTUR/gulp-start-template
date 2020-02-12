@@ -5,8 +5,19 @@
 // $max-width: the screen width in $units where you want to lock in the $max-size
 // $property: the property of the element that you would like to scale/lock
 // $unit: the units which all measurements are taken in
-@mixin css-lock($min-size: 1, $max-size: 1.4, $min-width: 20, $max-width: 100, $property: font-size, $unit: rem) {
-  #{$property}: calc(#{$min-size}#{$unit} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}#{$unit}) / (#{$max-width} - #{$min-width})));
+@mixin css-lock(
+  $min-size: 1,
+  $max-size: 1.4,
+  $min-width: 20,
+  $max-width: 100,
+  $property: font-size,
+  $unit: rem
+) {
+  #{$property}: calc(
+    #{$min-size}#{$unit} + (#{$max-size} - #{$min-size}) * ((
+            100vw - #{$min-width}#{$unit}
+          ) / (#{$max-width} - #{$min-width}))
+  );
 
   @media (max-width: #{$min-width}#{$unit}) {
     #{$property}: #{$min-size}#{$unit};
@@ -28,20 +39,18 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 //center
 @mixin center($axis) {
   @if $axis == both {
     @include vcenter;
-  }
-  @else if $axis == h {
+  } @else if $axis == h {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-  }
-  @else if $axis == v {
+  } @else if $axis == v {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -77,13 +86,13 @@
 
 //performance
 @mixin gpu {
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
 }
 
 //ol>li counter
 @mixin counter($var, $sep) {
   counter-reset: list + $var;
-  li:before{
+  li:before {
     content: counter(list + $var) $sep;
     counter-increment: list + $var;
   }
