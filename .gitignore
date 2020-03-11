@@ -2,7 +2,7 @@
 *.diff
 *.err
 *.orig
-*.log
+*.log*
 *.rej
 *.swo
 *.swp
@@ -21,9 +21,9 @@ Thumbs.db
 .tmproj
 *.esproj
 nbproject
-*.sublime-project
-*.sublime-workspace
+*.sublime*
 .idea
+.vscode
 
 # Folders to ignore
 .sass-cache
