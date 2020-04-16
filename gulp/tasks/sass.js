@@ -50,11 +50,6 @@ const processors = [
   cssDeclarationSorter({ order: 'concentric-css' }),
   // auto adds vendor prefixes
   autoprefixer(),
-  // pack all media queries
-  mqpacker({
-    sort: sortCSSmq, //default - mobile-first
-    // replace with 'sort: sortCSSmq.desktopFirst' for desktop-first
-  }),
 ];
 
 // production pipes
@@ -62,11 +57,11 @@ const prodPipes = lazypipe()
   // minify CSS
   .pipe(postcss, [cssnano()])
   // if revision == true: add hash number to your CSS files names
-  .pipe(function() {
+  .pipe(function () {
     return gulpif(config.revision, rev());
   });
 
-const renderCss = critical => {
+const renderCss = (critical) => {
   return (
     gulp
       // take all SASS/SCSS files
@@ -86,8 +81,16 @@ const renderCss = critical => {
       .pipe(postcss(processors))
       // if critical CSS part: rename
       .pipe(gulpif(critical, rename({ prefix: config.splitOptions.prefix })))
-      // split CSS to critical/rest
-      .pipe(postcss([postcssCriticalSplit(getSplitOptions(critical))]))
+      // split CSS to critical/rest and pack all media queries
+      .pipe(
+        postcss([
+          postcssCriticalSplit(getSplitOptions(critical)),
+          mqpacker({
+            sort: sortCSSmq, //default - mobile-first
+            // replace with 'sort: sortCSSmq.desktopFirst' for desktop-first
+          }),
+        ])
+      )
       // rename file with .min suffix
       .pipe(rename({ suffix: '.min' }))
       // if production: run production pipes
@@ -121,12 +124,9 @@ function getSplitOptions(isCritical) {
 gulp.task('sass:critical', () => renderCss(true));
 gulp.task('sass:rest', () => renderCss(false));
 
-const build = gulp => gulp.series('sass:critical', 'sass:rest');
-const watch = gulp => () =>
-  gulp.watch(
-    config.src.sass + '/**/*.{sass,scss}',
-    gulp.series('sass:critical', 'sass:rest')
-  );
+const build = (gulp) => gulp.series('sass:critical', 'sass:rest');
+const watch = (gulp) => () =>
+  gulp.watch(config.src.sass + '/**/*.{sass,scss}', gulp.series('sass:critical', 'sass:rest'));
 
 module.exports.build = build;
 module.exports.watch = watch;

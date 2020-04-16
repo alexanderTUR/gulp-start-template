@@ -19,7 +19,7 @@ gulp.task('sprite', () =>
     // remove all fill, style and stroke declarations in out shapes
     .pipe(
       gulpcheerio({
-        run: function($) {
+        run: function ($) {
           $('[fill]').removeAttr('fill');
           $('[stroke]').removeAttr('stroke');
           $('[style]').removeAttr('style');
@@ -42,8 +42,7 @@ gulp.task('sprite', () =>
             sprite: '../sprites/sprite.svg',
             render: {
               scss: {
-                dest:
-                  '../../../' + config.src.sassGen + '/_sprite-generated.scss',
+                dest: '../../../' + config.src.sassGen + '/_sprite-generated.scss',
                 template: config.src.sass + '/settings/_sprite-template.scss',
               },
             },
@@ -54,9 +53,8 @@ gulp.task('sprite', () =>
     .pipe(gulp.dest(config.dest.img))
 );
 
-const build = gulp => gulp.series('sprite');
-const watch = gulp => () =>
-  gulp.watch(config.src.icons + '/*.svg', gulp.parallel('sprite'));
+const build = (gulp) => gulp.series('sprite');
+const watch = (gulp) => () => gulp.watch(config.src.icons + '/*.svg', gulp.parallel('sprite'));
 
 module.exports.build = build;
 module.exports.watch = watch;

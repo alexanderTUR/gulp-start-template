@@ -1,39 +1,39 @@
-//Settings
-@import "settings/all";
+// Settings
+@import 'settings/all';
 
-//Normalize CSS
-@import "global/normalize";
+// Normalize CSS
+@import 'global/normalize';
 
-//Fonts
-@import "global/fonts";
+// Fonts
+@import 'global/fonts';
 
-//Global base styles
-@import "global/base";
+// Global base styles
+@import 'global/base';
 
-//Libs styles
-@import "libs/all";
+// Libs styles
+@import 'libs/all';
 
-//Icons styles
-@import "generated/sprite-generated";
+// Icons styles
+@import 'generated/sprite-generated';
 
-//Elements styles
-@import "elements/example";
+// Elements styles
+@import 'elements/example';
 
-//Components styles
-@import "components/example";
+// Components styles
+@import 'components/example';
 
-//Blocks styles
-@import "blocks/example";
+// Blocks styles
+@import 'blocks/example';
 
-//Global page layout styles
-@import "layouts/header";
-@import "layouts/footer";
+// Global page layout styles
+@import 'layouts/header';
+@import 'layouts/footer';
 
-//Page styles
-@import "pages/index";
+// Page styles
+@import 'pages/index';
 
-//Examples styles (comment out before development)
-@import "global/start-examples";
+// Examples styles (comment out before development)
+@import 'global/start-examples';
 
-//Debug styles (comment out before production)
-@import "settings/debug";
+// Debug styles (comment out before production)
+@import 'settings/debug';

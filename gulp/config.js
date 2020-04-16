@@ -1,10 +1,7 @@
 import util from 'gulp-util';
 
 const production =
-  util.env.production ||
-  util.env.prod ||
-  util.env._.indexOf('build') !== -1 ||
-  false;
+  util.env.production || util.env.prod || util.env._.indexOf('build') !== -1 || false;
 
 // main paths
 const srcPath = 'src';
@@ -49,18 +46,15 @@ const config = {
     prefix: 'critical-',
   },
 
-  setEnv: function(env) {
+  setEnv: function (env) {
     if (typeof env !== 'string') return;
     this.env = env;
     this.production = env === 'production';
     process.env.NODE_ENV = env;
   },
 
-  logEnv: function() {
-    util.log(
-      'Environment:',
-      util.colors.white.bgGreen(' ' + process.env.NODE_ENV + ' ')
-    );
+  logEnv: function () {
+    util.log('Environment:', util.colors.white.bgGreen(' ' + process.env.NODE_ENV + ' '));
   },
 
   errorHandler: require('./util/handle-errors'),

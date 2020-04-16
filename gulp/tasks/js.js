@@ -14,7 +14,7 @@ const prodPipes = lazypipe()
   // minify JS
   .pipe(terser)
   // if revision == true: add hash number to your JS files names
-  .pipe(function() {
+  .pipe(function () {
     return gulpif(config.revision, rev());
   });
 
@@ -94,8 +94,8 @@ gulp.task('js:main', () =>
     .pipe(gulp.dest('./'))
 );
 
-const build = gulp => gulp.series('js:bundle', 'js:main');
-const watch = gulp => () =>
+const build = (gulp) => gulp.series('js:bundle', 'js:main');
+const watch = (gulp) => () =>
   gulp.watch(config.src.js + '/**/*.js', gulp.series('js:bundle', 'js:main'));
 
 module.exports.build = build;

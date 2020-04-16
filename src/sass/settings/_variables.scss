@@ -1,11 +1,11 @@
-//Colors variables
+// Colors variables
 $color-white: #fff;
 $color-black: #000;
 
-//Base font size
+// Base font size
 $base-font-size: 16px !default;
 
-//Breakpoints for include-media mixins
+// Breakpoints for include-media mixins
 $breakpoints: (
   phoneSmall: 375px,
   phoneReg: 414px,
@@ -16,5 +16,5 @@ $breakpoints: (
   desktopMid: 1366px,
   desktopReg: 1440px,
   desktopBig: 1600px,
-  desktopLarge: 1920px
+  desktopLarge: 1920px,
 );

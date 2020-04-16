@@ -1,4 +1,4 @@
-//CSS Lock
+// CSS Lock
 // $min-size: minimum element $property size in $unit specified
 // $max-size: maximum element $property size in $unit specified
 // $min-width: the screen width in $units where you want to lock in the $min-size
@@ -14,9 +14,8 @@
   $unit: rem
 ) {
   #{$property}: calc(
-    #{$min-size}#{$unit} + (#{$max-size} - #{$min-size}) * ((
-            100vw - #{$min-width}#{$unit}
-          ) / (#{$max-width} - #{$min-width}))
+    #{$min-size}#{$unit} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}#{$unit}) /
+          (#{$max-width} - #{$min-width}))
   );
 
   @media (max-width: #{$min-width}#{$unit}) {
@@ -28,13 +27,13 @@
   }
 }
 
-//smooth font
+// smooth font
 @mixin smooth-font {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-//vertical-align at center
+// vertical-align at center
 @mixin vcenter {
   position: absolute;
   top: 50%;
@@ -42,7 +41,7 @@
   transform: translate(-50%, -50%);
 }
 
-//center
+// center
 @mixin center($axis) {
   @if $axis == both {
     @include vcenter;
@@ -57,21 +56,21 @@
   }
 }
 
-//clearfix
+// clearfix
 @mixin clr {
   &:after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
   }
 }
 
-//transition
+// transition
 @mixin transition($property: all, $duration: 0.2s, $easing: ease) {
   transition: $property $duration $easing;
 }
 
-//Images
+// images
 @mixin img {
   display: block;
   max-width: 100%;
@@ -84,12 +83,12 @@
   background-position: 50% 50%;
 }
 
-//performance
+// performance
 @mixin gpu {
   transform: translate3d(0, 0, 0);
 }
 
-//ol>li counter
+// ol>li counter
 @mixin counter($var, $sep) {
   counter-reset: list + $var;
   li:before {
@@ -98,7 +97,7 @@
   }
 }
 
-//reset buttons
+// reset buttons
 @mixin resetbutton($padding: 0) {
   border: none;
   margin: 0;
@@ -110,12 +109,31 @@
   outline: none;
 }
 
-//reset first-child/last-child margins
+// reset first-child/last-child margins
 @mixin marginchildreset {
   &:first-child {
     margin-top: 0;
   }
   &:last-child {
     margin-bottom: 0;
+  }
+}
+
+// paddings for conatiners
+@mixin container-pad {
+  padding-left: 16px;
+  padding-right: 16px;
+  @include media('>=tabletSmall', '<tabletReg') {
+    padding-left: 58px;
+    padding-right: 58px;
+  }
+}
+
+// limit width for containers
+@mixin container-lim($width: 1212px, $media: '>=tabletReg') {
+  @include media($media) {
+    max-width: $width;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

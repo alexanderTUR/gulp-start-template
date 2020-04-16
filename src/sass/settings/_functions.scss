@@ -1,9 +1,9 @@
-//px to em function
+// px to em function
 @function em($pixels, $context: $base-font-size/1px) {
   @return #{$pixels/$context}em;
 }
 
-//px to rem function
+// px to rem function
 @function rem($pixels, $context: $base-font-size/1px) {
   @return #{$pixels/$context}rem;
 }

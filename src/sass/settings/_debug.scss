@@ -1,11 +1,11 @@
-//highlight tags without necessary attributes
+// highlight tags without necessary attributes
 img:not([alt]),
 label:not([for]),
-input[type="submit"]:not([value]) {
+input[type='submit']:not([value]) {
   outline: 2px solid red;
 }
 
-//alarm if the first child inside the list is not li and other similar examples
+// alarm if the first child inside the list is not li and other similar examples
 ul > *:not(li),
 ol > *:not(li),
 dl > *:not(dt):not(dd) {

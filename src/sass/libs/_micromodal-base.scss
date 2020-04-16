@@ -3,7 +3,8 @@
 \**************************/
 
 .modal {
-  font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica,
+    ubuntu, roboto, noto, segoe ui, arial, sans-serif;
 }
 
 .modal__overlay {
@@ -51,7 +52,7 @@
 }
 
 .modal__header .modal__close:before {
-  content: "\2715";
+  content: '\2715';
 }
 
 .modal__content {
@@ -62,11 +63,11 @@
 }
 
 .modal__btn {
-  font-size: .875rem;
-  padding: .5rem 1rem;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
   background-color: #e6e6e6;
   color: rgba(0, 0, 0, 0.8);
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   border-style: none;
   border-width: 0;
   cursor: pointer;
@@ -80,10 +81,11 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);
-  transition: -webkit-transform .25s ease-out;
-  transition: transform .25s ease-out;
+  transition: -webkit-transform 0.25s ease-out;
+  transition: transform 0.25s ease-out;
 
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     transform: scale(1.05);
   }
 }
@@ -143,7 +145,7 @@
     display: block;
   }
 
-  &[aria-hidden="false"] {
+  &[aria-hidden='false'] {
     .modal__overlay {
       animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
     }
@@ -153,7 +155,7 @@
     }
   }
 
-  &[aria-hidden="true"] {
+  &[aria-hidden='true'] {
     .modal__overlay {
       animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
     }
@@ -163,7 +165,8 @@
     }
   }
 
-  .modal__container, .modal__overlay {
+  .modal__container,
+  .modal__overlay {
     will-change: transform;
   }
 }
