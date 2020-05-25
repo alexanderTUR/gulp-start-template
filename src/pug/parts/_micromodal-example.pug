@@ -1,12 +1,12 @@
 //Micromodal example bgn
 #modal-1.modal.micromodal-slide(aria-hidden="true")
-  .modal__overlay(tabindex="-1" data-micromodal-close="")
+  .modal__overlay(tabindex="-1" data-micromodal-close)
     .modal__container(role="dialog" aria-modal="true" aria-labelledby="modal-1-title")
       header.modal__header
         h2#modal-1-title.modal__title
           | Micromodal
         button.modal__close(aria-label="Close modal" data-micromodal-close="")
-      main#modal-1-content.modal__content
+      #modal-1-content.modal__content
         p
           | Try hitting the
           code tab
@@ -14,5 +14,5 @@
           code esc
           |  to close modal.
       footer.modal__footer
-        button.modal__btn(data-micromodal-close="" aria-label="Close this dialog window") Close
+        button.modal__btn(data-micromodal-close aria-label="Close this dialog window") Close
 //Micromodal example end

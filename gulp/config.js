@@ -1,7 +1,8 @@
-import util from 'gulp-util';
+import log from 'fancy-log';
+import ansiColors from 'ansi-colors';
 
 const production =
-  util.env.production || util.env.prod || util.env._.indexOf('build') !== -1 || false;
+  process.env.NODE_ENV === 'production' || process.argv.indexOf('build') !== -1 || false;
 
 // main paths
 const srcPath = 'src';
@@ -13,6 +14,7 @@ const config = {
   revision: false, // set to true if CSS and JS files revision needed
   minifyHtml: false, // set to true if HTML minification needed
   revManifest: 'rev-manifest.json',
+  nodeModules: 'node_modules',
 
   // src paths
   src: {
@@ -23,6 +25,7 @@ const config = {
     js: srcPath + '/js',
     jsLibs: srcPath + '/js/libs',
     jsVendor: srcPath + '/js/vendor',
+    jsPolyfills: srcPath + '/js/libs/polyfills',
     img: srcPath + '/img',
     icons: srcPath + '/img/icons',
     fonts: srcPath + '/fonts',
@@ -54,7 +57,7 @@ const config = {
   },
 
   logEnv: function () {
-    util.log('Environment:', util.colors.white.bgGreen(' ' + process.env.NODE_ENV + ' '));
+    log(ansiColors.black.bgYellow(`Environment: ${process.env.NODE_ENV}`));
   },
 
   errorHandler: require('./util/handle-errors'),

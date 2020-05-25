@@ -1,11 +1,11 @@
 // Settings
 @import 'settings/all';
 
-// Normalize CSS
-@import 'global/normalize';
+// Normalize CSS (through PostCSS-plugin)
+@import-normalize;
 
-// Fonts
-@import 'global/fonts';
+// Sanitize CSS (through PostCSS-plugin)
+// @import-sanitize;
 
 // Global base styles
 @import 'global/base';

@@ -1,7 +1,13 @@
 // All styles below are for example
-.main {
-  h2 {
-    @include transition(color);
+.page-main {
+  h1 {
+    font-size: 42px; // px values will replace with rem values
+    line-height: 56px; // px values will replace with unitless values
+    @include transition(
+      color,
+      0.5s,
+      easeInOutSine
+    ); // replace easing name to cubic-bezier(), look at easings.net for details
     &:enter {
       // will replace as :hover and :focus
       color: blue;
@@ -25,12 +31,48 @@
 
 // Example how to use color function
 .color-function {
-  width: 100px;
-  height: 100px;
-  border: 1px solid black;
-  background: color-mod(
-    $color-black a(30%)
-  ); // it`s takes your color and add alpha channel for opacity
+  width: 150px;
+  height: 150px;
+  border: 2px solid black;
+  background: color-mod(yellow blend(red 50%)); // blend your colors
+}
+
+// Example how to mix colors with transparency
+.color-with-transparency {
+  width: 150px;
+  height: 150px;
+  border: 2px solid black;
+  background: rgba(green, 0.5);
+}
+
+// Example how to create smooth gradients
+.smooth-gradient {
+  width: 150px;
+  height: 150px;
+  border: 2px solid black;
+  background: radial-gradient(circle at top right, red, ease-in-out, blue);
+}
+
+// Example how to create borders which do not affect the layout of the document (inside and outside)
+.border-align-outside {
+  width: 150px;
+  height: 150px;
+  border: inside 2px solid black;
+}
+
+.border-align-inside {
+  width: 150px;
+  height: 150px;
+  border: outside 2px solid black;
+}
+
+// Example how to customize scrollbars with CSS
+.scrollbar-example {
+  height: 200px;
+  width: 200px;
+  overflow: auto;
+  scrollbar-color: red white;
+  scrollbar-width: thin;
 }
 
 // Animation usage example (from https://daneden.github.io/animate.css/)
@@ -41,6 +83,38 @@
   border-radius: 50%;
   background-color: red;
   animation: bounce 1.5s infinite;
+}
+
+// Animation usage example (from https://github.com/miniMAC/magic/)
+.animation-magic-test {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  animation: twisterInDown 1.5s infinite;
+  animation-direction: alternate-reverse;
+}
+
+// Example how to create three different types of triangles
+.isosceles-triangle {
+  triangle: pointing-up;
+  width: 150px;
+  height: 150px;
+  background-color: black;
+}
+
+.right-isosceles-triangle {
+  triangle: right-iso pointing-down;
+  width: 150px;
+  background-color: red;
+}
+
+.equilateral-triangle {
+  triangle: equilateral pointing-left;
+  height: 150px;
+  background-color: green;
 }
 
 // CSS-lock example
@@ -57,15 +131,26 @@
 
 // Example how to use breakpoints mixin (more details at https://include-media.com/)
 .test-media {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   background-color: green;
+  border: 2px solid black;
   @include media('>phoneReg', '<=tabletReg') {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     background-color: red;
   }
 }
+
+// CriticalCSS usage example
+/* critical:start */
+.test-critical {
+  width: 150px;
+  height: 150px;
+  background-color: black;
+  border: 2px solid black;
+}
+/* critical:end */
 
 // SVG-sprite icons styles example
 .icon-fill {
@@ -76,15 +161,6 @@
     color: red;
   }
 }
-
-// CriticalCSS usage example
-/* critical:start */
-.test-critical {
-  width: 150px;
-  height: 100px;
-  background-color: black;
-}
-/* critical:end */
 
 // LostGrig usage example (look for documentation at http://lostgrid.org/docs.html)
 .lost-example {

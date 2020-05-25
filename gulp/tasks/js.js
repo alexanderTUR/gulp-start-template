@@ -24,21 +24,16 @@ gulp.task('js:bundle', () =>
     .src([
       //  - uncomment what you need or add you own libraries
       //  - SVG-sprites fallback for IE (include, if you use SVG-sprites)
-      config.src.jsLibs + '/svg4everybody_2.1.9/svg4everybody.js',
-      //  - Micromodal plugin (with pollyfill for IE11 and below - (https://micromodal.now.sh/)
-      // config.src.jsLibs + '/micromodal_0.4.2/micromodal-for-ie-polyfill.js',
-      // config.src.jsLibs + '/micromodal_0.4.2/micromodal.min.js',
-      //  - GSAP (animations - https://greensock.com/gsap)
-      // config.src.jsLibs + '/gsap_3.0.4/gsap.js',
-      //  - ScrollMagic (do magic on scroll - http://scrollmagic.io/)
-      // config.src.jsLibs + '/scrollmagic_2.0.7/ScrollMagic.js',
-      // config.src.jsLibs + '/scrollmagic_2.0.7/jquery.ScrollMagic.js',
-      // config.src.jsLibs + '/scrollmagic_2.0.7/animation.gsap.js',
-      // config.src.jsLibs + '/scrollmagic_2.0.7/debug.addIndicators.js',
+      config.nodeModules + '/svg4everybody/dist/svg4everybody.js',
+      //  - Object.assign and Array.from polyfills for IE (needed for Micro Modal plugin)
+      // config.src.jsPolyfills + '/Object.assign.js',
+      // config.src.jsPolyfills + '/Array.from.js',
+      //  - Micromodal plugin (lightweight modal - https://micromodal.now.sh/)
+      // config.nodeModules + '/micromodal/dist/micromodal.js',
       //  - Slick slider (best carousel - https://kenwheeler.github.io/slick/)
-      // config.src.jsLibs + '/slick_1.8.1/slick.js',
+      // config.nodeModules + '/slick-carousel/slick/slick.js',
       //  - Scroll to ID plugin (navigation on page - http://manos.malihu.gr/page-scroll-to-id/)
-      // config.src.jsLibs + '/scrolltoid_1.6.3/jquery.malihu.PageScroll2id.js',
+      // config.nodeModules + '/page-scroll-to-id/jquery.malihu.PageScroll2id.js',
     ])
     // error handler
     .on('error', config.errorHandler)
@@ -51,7 +46,7 @@ gulp.task('js:bundle', () =>
     // if production: run production pipes
     .pipe(gulpif(config.production, prodPipes()))
     // if development: write sourcemaps
-    .pipe(gulpif(!config.production, sourcemaps.write('/')))
+    .pipe(gulpif(!config.production, sourcemaps.write()))
     // put result to destination folder
     .pipe(gulp.dest(config.dest.js))
     // if revision == true: write old and new files names to manifest.json
@@ -81,7 +76,7 @@ gulp.task('js:main', () =>
     // if production: run production pipes
     .pipe(gulpif(config.production, prodPipes()))
     // if development: write sourcemaps
-    .pipe(gulpif(!config.production, sourcemaps.write('/')))
+    .pipe(gulpif(!config.production, sourcemaps.write()))
     // put result to destination folder
     .pipe(gulp.dest(config.dest.js))
     // if revision == true: write old and new files names to manifest.json

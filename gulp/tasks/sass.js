@@ -3,19 +3,28 @@ import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
-import mqpacker from 'css-mqpacker';
-import sortCSSmq from 'sort-css-media-queries';
+import postcssSortMediaQueries from 'postcss-sort-media-queries';
 import postcssAnimation from 'postcss-animation';
+import postcssMagicAnimation from 'postcss-magic-animations';
 import postcssWillChangeTransition from 'postcss-will-change-transition';
 import postcssWillChange from 'postcss-will-change';
 import flexFix from 'postcss-flexbugs-fixes';
 import pxtorem from 'postcss-pxtorem';
+import lineHeightToUnitless from 'postcss-line-height-px-to-unitless';
 import smoothScroll from 'postcss-momentum-scrolling';
 import postcssAspectRatio from 'postcss-aspect-ratio';
 import postcssColorMod from 'postcss-color-mod-function';
+import rgb from 'postcss-rgb';
 import postcssPseudoClassEnter from 'postcss-pseudo-class-enter';
 import cssDeclarationSorter from 'css-declaration-sorter';
 import postcssCriticalSplit from 'postcss-critical-split';
+import easingGradients from 'postcss-easing-gradients';
+import borderAlign from 'postcss-border-align';
+import scrollbar from 'postcss-scrollbar';
+import postcssNormalize from 'postcss-normalize';
+import postcssTriangle from 'postcss-triangle';
+import postcssEasings from 'postcss-easings';
+import postcssViewportHeight from 'postcss-viewport-height-correction';
 import cssnano from 'cssnano';
 import lost from 'lost';
 import gulpif from 'gulp-if';
@@ -26,16 +35,28 @@ import config from '../config';
 
 // Post-CSS plugins array
 const processors = [
+  // use the parts of normalize.css or sanitize.css that you need from your browserslist
+  postcssNormalize(),
+  // solve the popular problem when 100vh doesn’t fit the mobile browser screen
+  postcssViewportHeight(),
   // lostgrid grid system (look for documentation at http://lostgrid.org/docs.html)
   lost(),
+  // create three different types of CSS-triangles
+  postcssTriangle(),
   // adds @keyframes from animate.css
   postcssAnimation(),
+  // adds @keyframes from Magic Animations
+  postcssMagicAnimation(),
+  // replace easing name from easings.net to cubic-bezier()
+  postcssEasings(),
   // auto adds will-change property after transition property to speed up animations
   postcssWillChangeTransition(),
   // auto insert 3D hack before will-change property
   postcssWillChange(),
   // auto fix some flex-box issues
   flexFix(),
+  // auto convert a line-height value with px to a unitless value
+  lineHeightToUnitless(),
   // auto replace px to rem in all fonts rules
   pxtorem(),
   // auto adds -webkit-overflow-scrolling: touch to all stylechangeds with overflow: scroll for smooth scroll on iOS
@@ -44,6 +65,14 @@ const processors = [
   postcssAspectRatio(),
   // adds color functions (example - color(red a(90%))
   postcssColorMod(),
+  // use rgb and rgba with hex values
+  rgb(),
+  // enabling custom scrollbars
+  scrollbar(),
+  // allows you to create borders which do not affect the layout of the document
+  borderAlign(),
+  // create smooth linear-gradients that approximate easing functions
+  easingGradients(),
   // adds :hover and :focus states with one declaration (example - :enter)
   postcssPseudoClassEnter(),
   // auto sort css rules in 'concentric-css' order
@@ -81,13 +110,12 @@ const renderCss = (critical) => {
       .pipe(postcss(processors))
       // if critical CSS part: rename
       .pipe(gulpif(critical, rename({ prefix: config.splitOptions.prefix })))
-      // split CSS to critical/rest and pack all media queries
+      // split CSS to critical/rest and pack/sort all media queries
       .pipe(
         postcss([
           postcssCriticalSplit(getSplitOptions(critical)),
-          mqpacker({
-            sort: sortCSSmq, //default - mobile-first
-            // replace with 'sort: sortCSSmq.desktopFirst' for desktop-first
+          postcssSortMediaQueries({
+            sort: 'mobile-first', // or desktop-first
           }),
         ])
       )
@@ -96,7 +124,7 @@ const renderCss = (critical) => {
       // if production: run production pipes
       .pipe(gulpif(config.production, prodPipes()))
       // if development: write sourcemaps
-      .pipe(gulpif(!config.production, sourcemaps.write('./')))
+      .pipe(gulpif(!config.production, sourcemaps.write()))
       // put result to destination folder
       .pipe(gulp.dest(config.dest.css))
       // if revision == true: write old and new files names to manifest.json

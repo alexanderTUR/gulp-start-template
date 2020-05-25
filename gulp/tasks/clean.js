@@ -1,5 +1,6 @@
 import del from 'del';
-import util from 'gulp-util';
+import log from 'fancy-log';
+import ansiColors from 'ansi-colors';
 import config from '../config';
 
 const build = () => {
@@ -10,7 +11,7 @@ const build = () => {
         config.revManifest, // delete rev-manifest file
       ])
         // log to console deleted objects
-        .then((paths) => util.log('Deleted:', util.colors.cyan(paths.join('\n'))))
+        .then((paths) => log(ansiColors.black.bgRed(`Deleted: ${paths.join('\n')}`)))
     );
   };
 };
