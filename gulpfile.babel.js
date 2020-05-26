@@ -17,7 +17,7 @@ gulp.task('sass', getTaskBuild('sass'));
 gulp.task('sass:watch', getTaskWatch('sass'));
 
 // SVG sprite tasks
-gulp.task('sprite', () => getTaskBuild('sprite'));
+gulp.task('sprite', getTaskBuild('sprite'));
 gulp.task('sprite:watch', getTaskWatch('sprite'));
 
 // Copy files tasks

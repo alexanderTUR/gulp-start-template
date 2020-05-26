@@ -5,9 +5,9 @@ import gulpcheerio from 'gulp-cheerio';
 import svgSprite from 'gulp-svg-sprite';
 import config from '../config';
 
-gulp.task('sprite', () =>
+gulp.task('sprite:mono', () =>
   gulp
-    .src(config.src.icons + '/*.svg')
+    .src(`${config.src.iconsMono}/*.svg`)
     // minify svg
     .pipe(
       svgmin({
@@ -39,11 +39,11 @@ gulp.task('sprite', () =>
       svgSprite({
         mode: {
           symbol: {
-            sprite: '../sprites/sprite.svg',
+            sprite: '../sprites/sprite-mono.svg',
             render: {
               scss: {
-                dest: '../../../' + config.src.sassGen + '/_sprite-generated.scss',
-                template: config.src.sass + '/settings/_sprite-template.scss',
+                dest: `../../../${config.src.sassGen}/_sprite-mono-generated.scss`,
+                template: `${config.src.sass}/settings/_sprite-mono-template.scss`,
               },
             },
           },
@@ -53,8 +53,53 @@ gulp.task('sprite', () =>
     .pipe(gulp.dest(config.dest.img))
 );
 
-const build = (gulp) => gulp.series('sprite');
-const watch = (gulp) => () => gulp.watch(config.src.icons + '/*.svg', gulp.parallel('sprite'));
+gulp.task('sprite:multi', () =>
+  gulp
+    .src(`${config.src.iconsMulti}/*.svg`)
+    // minify svg
+    .pipe(
+      svgmin({
+        js2svg: {
+          pretty: true,
+        },
+      })
+    )
+    // remove all fill, style and stroke declarations in out shapes
+    .pipe(
+      gulpcheerio({
+        parserOptions: { xmlMode: true },
+      })
+    )
+    .pipe(
+      plumber({
+        errorHandler: config.errorHandler,
+      })
+    )
+    // build svg sprite
+    .pipe(
+      svgSprite({
+        mode: {
+          symbol: {
+            sprite: '../sprites/sprite-multi.svg',
+            render: {
+              scss: {
+                dest: `../../../${config.src.sassGen}/_sprite-multi-generated.scss`,
+                template: `${config.src.sass}/settings/_sprite-multi-template.scss`,
+              },
+            },
+          },
+        },
+      })
+    )
+    .pipe(gulp.dest(config.dest.img))
+);
+
+const build = (gulp) => gulp.parallel('sprite:mono', 'sprite:multi');
+const watch = (gulp) => () =>
+  gulp.watch(
+    [`${config.src.iconsMono}/*.svg`, `${config.src.iconsMulti}/*.svg`],
+    gulp.parallel('sprite:mono', 'sprite:multi')
+  );
 
 module.exports.build = build;
 module.exports.watch = watch;

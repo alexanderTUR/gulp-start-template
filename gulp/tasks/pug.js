@@ -31,7 +31,7 @@ const prodPipes = lazypipe()
     rootpath: config.dest.root,
   })
   // replace urls
-  .pipe(replace, ('url(../', 'url()'))
+  .pipe(replace, 'url(../', 'url(')
   // if minifyHtml == true: minify html files
   .pipe(function () {
     return gulpif(
@@ -44,10 +44,12 @@ const prodPipes = lazypipe()
   });
 
 const renderHtml = (onlyChanged) => {
+  const ignore = (type, message) =>
+    !/^This document appears to be written in Lorem ipsum text/.test(message);
   return (
     gulp
       // take you PUG files
-      .src([config.src.pug + '/[^_]*.pug'])
+      .src(`${config.src.pug}/[^_]*.pug`)
       // error handler
       .pipe(plumber({ errorHandler: config.errorHandler }))
       // work only with changed PUG files
@@ -67,7 +69,7 @@ const renderHtml = (onlyChanged) => {
         })
       )
       // validate result HTML files
-      .pipe(htmlValidator())
+      .pipe(htmlValidator({ verifyMessage: ignore }))
       // if production: run production pipes
       .pipe(gulpif(config.production, prodPipes()))
       // put result to destination folder
@@ -81,9 +83,9 @@ gulp.task('pug:changed', () => renderHtml(true));
 const build = (gulp) => gulp.parallel('pug');
 const watch = (gulp) => {
   return function () {
-    gulp.watch([config.src.pug + '/**/[^_]*.pug'], gulp.parallel('pug:changed'));
+    gulp.watch(`${config.src.pug}/**/[^_]*.pug`, gulp.parallel('pug:changed'));
 
-    gulp.watch([config.src.pug + '/**/_*.pug'], gulp.parallel('pug'));
+    gulp.watch(`${config.src.pug}/**/_*.pug`, gulp.parallel('pug'));
   };
 };
 

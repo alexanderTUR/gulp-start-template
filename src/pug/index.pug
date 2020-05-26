@@ -12,17 +12,15 @@ block content
   //- partial include example
   include parts/_example
 
-  //- Micromodal call button example
-  //- button(data-micromodal-trigger="modal-1") Open modal
-
-  //- mixin usage example
+  //- mixins usage examples
   div
 
     +spacer
-    +icon('icon-telegram', 'Telegram icon')
+    +icon-mono('icon-telegram', 'Telegram icon')
     +spacer
-    +icon('icon-facebook', 'Facebook icon')
+    +icon-mono('icon-facebook', 'Facebook icon')
     +spacer
+    +icon-multi('icon-js', 'JavaScript icon')
 
   //- variable set example
   - let list = ['text 1', 'text 2', 'text 3'];
@@ -84,6 +82,7 @@ block content
         p THIS IS "LOST" COLUMN N3
 
 //- block others
+  //- Micromodal show button example
   button(data-micromodal-trigger="modal-1") Show modal
   //- Micromodal body example
   include parts/_micromodal-example

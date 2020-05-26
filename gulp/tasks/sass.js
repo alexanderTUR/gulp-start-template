@@ -94,9 +94,9 @@ const renderCss = (critical) => {
   return (
     gulp
       // take all SASS/SCSS files
-      .src(config.src.sass + '/*.{sass,scss}')
+      .src(`${config.src.sass}/*.{sass,scss}`)
       // if development: init sourcemaps
-      .pipe(gulpif(!config.production, sourcemaps.init()))
+      .pipe(gulpif(!config.production, sourcemaps.init({ loadMaps: true })))
       // compile SASS
       .pipe(
         sass({
@@ -154,7 +154,7 @@ gulp.task('sass:rest', () => renderCss(false));
 
 const build = (gulp) => gulp.series('sass:critical', 'sass:rest');
 const watch = (gulp) => () =>
-  gulp.watch(config.src.sass + '/**/*.{sass,scss}', gulp.series('sass:critical', 'sass:rest'));
+  gulp.watch(`${config.src.sass}/**/*.{sass,scss}`, gulp.series('sass:critical', 'sass:rest'));
 
 module.exports.build = build;
 module.exports.watch = watch;

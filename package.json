@@ -2,6 +2,10 @@
   "name": "gulp-frontend-template",
   "version": "2.0.2",
   "description": "Start GULP frontend template, based on Coderivers <html@coderiver.com.ua> template",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexanderTUR/gulp-start-template.git"
+  },
   "main": "gulpfile.js",
   "scripts": {
     "build": "gulp build --production",
@@ -76,18 +80,5 @@
     "sort-css-media-queries": "^1.5.0",
     "svg4everybody": "^2.1.9"
   },
-  "browserslist": [
-    "last 2 version",
-    "not dead",
-    "> 1%",
-    "not OperaMini all",
-    "not OperaMobile > 0",
-    "not FirefoxAndroid > 0",
-    "not Android > 0",
-    "not Baidu > 0",
-    "not QQAndroid > 0",
-    "not UCAndroid > 0",
-    "not ExplorerMobile > 0",
-    "not kaios > 0"
-  ]
+  "browserslist": "last 2 version, not dead, > 1%, not OperaMini all, not OperaMobile > 0, not FirefoxAndroid > 0, not Android > 0, not Baidu > 0, not QQAndroid > 0, not UCAndroid > 0, not ExplorerMobile > 0, not kaios > 0"
 }

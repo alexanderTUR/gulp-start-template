@@ -153,13 +153,17 @@
 /* critical:end */
 
 // SVG-sprite icons styles example
-.icon-fill {
+.icon-mono {
   font-size: 50px;
   color: #000;
   @include transition(color);
   &:enter {
     color: red;
   }
+}
+
+.icon-multi {
+  font-size: 50px;
 }
 
 // LostGrig usage example (look for documentation at http://lostgrid.org/docs.html)
