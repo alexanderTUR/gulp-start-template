@@ -75,8 +75,8 @@ const processors = [
   easingGradients(),
   // adds :hover and :focus states with one declaration (example - :enter)
   postcssPseudoClassEnter(),
-  // auto sort css rules in 'concentric-css' order
-  // cssDeclarationSorter({ order: 'smacss' }),
+  // auto sort css rules in 'SMACSS' order
+  cssDeclarationSorter({ order: 'smacss' }),
   // auto adds vendor prefixes
   autoprefixer(),
 ];
