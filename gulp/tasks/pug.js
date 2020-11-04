@@ -44,8 +44,12 @@ const prodPipes = lazypipe()
   });
 
 const renderHtml = (onlyChanged) => {
-  const ignore = (type, message) =>
-    !/^This document appears to be written in Lorem ipsum text/.test(message);
+  const ignore = (type, message) => {
+    return (
+      !/^This document appears to be written in Lorem ipsum text/.test(message) &&
+      !/^Article lacks heading./.test(message)
+    );
+  };
   return (
     gulp
       // take you PUG files

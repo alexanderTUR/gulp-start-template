@@ -76,7 +76,7 @@ const processors = [
   // adds :hover and :focus states with one declaration (example - :enter)
   postcssPseudoClassEnter(),
   // auto sort css rules in 'concentric-css' order
-  cssDeclarationSorter({ order: 'concentric-css' }),
+  // cssDeclarationSorter({ order: 'smacss' }),
   // auto adds vendor prefixes
   autoprefixer(),
 ];
@@ -110,12 +110,14 @@ const renderCss = (critical) => {
       .pipe(postcss(processors))
       // if critical CSS part: rename
       .pipe(gulpif(critical, rename({ prefix: config.splitOptions.prefix })))
-      // split CSS to critical/rest and pack/sort all media queries
+      // split CSS to critical/rest
+      .pipe(postcss([postcssCriticalSplit(getSplitOptions(critical))]))
+      // pack/sort all media queries
       .pipe(
         postcss([
-          postcssCriticalSplit(getSplitOptions(critical)),
           postcssSortMediaQueries({
-            sort: 'mobile-first', // or desktop-first
+            // sort: 'mobile-first' default value
+            // sort: 'desktop-first'
           }),
         ])
       )
