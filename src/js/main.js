@@ -1,11 +1,14 @@
 // This script solve the popular problem when 100vh doesn’t fit the mobile browser screen (work with PostCSS plugin)
+const customViewportCorrectionVariable = 'vh';
+
 function setViewportProperty(doc) {
   let prevClientHeight;
+  const customVar = '--' + (customViewportCorrectionVariable || 'vh');
   function handleResize() {
     let clientHeight = doc.clientHeight;
     if (clientHeight === prevClientHeight) return;
     requestAnimationFrame(function updateViewportHeight() {
-      doc.style.setProperty('--vh', clientHeight * 0.01 + 'px');
+      doc.style.setProperty(customVar, clientHeight * 0.01 + 'px');
       prevClientHeight = clientHeight;
     });
   }
