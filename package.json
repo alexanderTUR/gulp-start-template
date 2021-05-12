@@ -54,7 +54,7 @@
     "lost": "^8.3.1",
     "micromodal": "^0.4.6",
     "page-scroll-to-id": "^1.6.5",
-    "postcss": "^8.2.4",
+    "postcss": "^8.2.10",
     "postcss-animation": "0.0.12",
     "postcss-aspect-ratio": "^1.0.2",
     "postcss-border-align": "^1.0.7",
