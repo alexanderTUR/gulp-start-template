@@ -1,6 +1,5 @@
 import gulp from 'gulp';
 import fs from 'fs';
-import htmlValidator from 'gulp-w3c-html-validator';
 import pug from 'gulp-pug';
 import plumber from 'gulp-plumber';
 import changed from 'gulp-changed';
@@ -44,12 +43,6 @@ const prodPipes = lazypipe()
   });
 
 const renderHtml = (onlyChanged) => {
-  const ignore = (type, message) => {
-    return (
-      !/^This document appears to be written in Lorem ipsum text/.test(message) &&
-      !/^Article lacks heading./.test(message)
-    );
-  };
   return (
     gulp
       // take you PUG files
@@ -72,8 +65,6 @@ const renderHtml = (onlyChanged) => {
           end_with_newline: true,
         })
       )
-      // validate result HTML files
-      .pipe(htmlValidator({ verifyMessage: ignore }))
       // if production: run production pipes
       .pipe(gulpif(config.production, prodPipes()))
       // put result to destination folder

@@ -1,5 +1,6 @@
 import gulp from 'gulp';
-import sass from 'gulp-sass';
+import gulpSass from 'gulp-sass';
+import nodeSass from 'node-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -32,6 +33,8 @@ import rename from 'gulp-rename';
 import lazypipe from 'lazypipe';
 import rev from 'gulp-rev';
 import config from '../config';
+
+const sass = gulpSass(nodeSass);
 
 // Post-CSS plugins array
 const processors = [

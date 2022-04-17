@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import config from './gulp/config';
+import config from './gulp/config.js';
 
 const getTaskBuild = (task) => require('./gulp/tasks/' + task).build(gulp);
 const getTaskWatch = (task) => require('./gulp/tasks/' + task).watch(gulp);
