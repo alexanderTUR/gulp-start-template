@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import gulpSass from 'gulp-sass';
-import nodeSass from 'node-sass';
+import sass from 'sass';
 import sourcemaps from 'gulp-sourcemaps';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -34,7 +34,7 @@ import lazypipe from 'lazypipe';
 import rev from 'gulp-rev';
 import config from '../config';
 
-const sass = gulpSass(nodeSass);
+const sassCompile = gulpSass(sass);
 
 // Post-CSS plugins array
 const processors = [
@@ -102,9 +102,8 @@ const renderCss = (critical) => {
       .pipe(gulpif(!config.production, sourcemaps.init({ loadMaps: true })))
       // compile SASS
       .pipe(
-        sass({
-          outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
-          precision: 5,
+        sassCompile({
+          outputStyle: config.production ? 'compact' : 'expanded',
         })
       )
       // error handler

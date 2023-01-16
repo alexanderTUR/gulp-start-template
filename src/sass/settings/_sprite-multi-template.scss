@@ -5,7 +5,7 @@
 
 {{#shapes}}
 .{{base}} {
-  font-size:({{height.inner}}/10)*1rem;
-  width:({{width.inner}}/{{height.inner}})*1em;
+  font-size: calc({{height.inner}} / 10)*1rem;
+  width: calc({{width.inner}} / {{height.inner}})*1em;
 }
 {{/shapes}}
